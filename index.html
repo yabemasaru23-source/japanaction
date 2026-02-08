@@ -1,0 +1,704 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  Play, Video, Sword, Users, CheckCircle, ArrowRight, Star, MessageCircle, 
+  Calendar, ChevronDown, Menu, X, Zap, Camera, Film, Award, AlertTriangle, 
+  TrendingUp, Check, Flame, Heart, PlayCircle, Instagram, Twitter, Trophy,
+  Mic2, Globe, Monitor, Laptop
+} from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showFloatingBtn, setShowFloatingBtn] = useState(false);
+  const [activeAccordion, setActiveAccordion] = useState(null);
+  const [heroImageIndex, setHeroImageIndex] = useState(0);
+
+  // Hero Background Images
+  const heroImages = [
+    "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop", // Stunt
+    "https://images.unsplash.com/photo-1536769947700-c97559c5d18d?q=80&w=1978&auto=format&fit=crop", // Camera
+    "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"  // Action
+  ];
+
+  // Image Slider Effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeroImageIndex((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Scroll & Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+
+    const handleScroll = () => {
+      setShowFloatingBtn(window.scrollY > 600);
+    };
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
+  }, []);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsMenuOpen(false);
+  };
+
+  const toggleAccordion = (index) => {
+    setActiveAccordion(activeAccordion === index ? null : index);
+  };
+
+  return (
+    <div className="font-sans text-gray-800 bg-black min-h-screen pb-24 md:pb-0 overflow-x-hidden selection:bg-yellow-400 selection:text-black">
+      
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+        
+        body { font-family: 'Noto Sans JP', sans-serif; }
+        .font-impact { font-family: 'Anton', sans-serif; }
+
+        /* Glitch & Animations */
+        .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(30px) skewX(-5deg);
+          transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-on-scroll.visible {
+          opacity: 1;
+          transform: translateY(0) skewX(0);
+        }
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+
+        .text-stroke { -webkit-text-stroke: 1px white; color: transparent; }
+        .text-stroke-black { -webkit-text-stroke: 1px black; color: transparent; }
+        .text-stroke-red { -webkit-text-stroke: 2px #DC2626; color: transparent; }
+        
+        .bg-noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        .clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+        .clip-diagonal-reverse { clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); }
+      `}</style>
+
+      {/* --- Header --- */}
+      <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b-2 border-red-600 shadow-2xl">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <div className="flex-shrink-0 cursor-pointer group" onClick={() => window.scrollTo(0,0)}>
+              <div className="flex flex-col transform group-hover:-skew-x-12 transition-transform duration-300">
+                <span className="text-[10px] md:text-xs text-yellow-400 font-black tracking-widest uppercase">Action & Creative School</span>
+                <span className="text-xl md:text-3xl font-impact text-white tracking-wider italic">
+                  JAPAN ACTION <span className="text-red-600">CREATOR</span>
+                </span>
+              </div>
+            </div>
+            <div className="hidden md:flex items-center space-x-6">
+              <div className="bg-yellow-400 text-black px-4 py-1 skew-x-[-12deg] animate-pulse">
+                <span className="block skew-x-[12deg] font-black text-sm">4月開講 3期生募集中</span>
+              </div>
+              <button 
+                onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
+                className="bg-red-600 text-white px-6 py-2 font-black italic hover:bg-white hover:text-red-600 transition-colors duration-300 skew-x-[-12deg] shadow-[0_0_15px_rgba(220,38,38,0.5)]"
+              >
+                <span className="flex items-center gap-2 skew-x-[12deg]">
+                  <MessageCircle size={18} /> LINEで相談
+                </span>
+              </button>
+            </div>
+            <div className="flex md:hidden">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-2">
+                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-zinc-900 border-t-2 border-red-600 absolute w-full shadow-2xl">
+            <div className="px-4 pt-2 pb-6 space-y-2">
+              {['夢への挑戦', 'ギャラリー', '講師紹介', 'カリキュラム'].map((item, i) => (
+                <button 
+                  key={i}
+                  onClick={() => scrollToSection(['dream', 'gallery', 'mentors', 'curriculum'][i])} 
+                  className="block w-full text-left py-4 text-white font-black text-xl italic border-b border-gray-800 hover:text-red-500 hover:pl-2 transition-all"
+                >
+                  {item.toUpperCase()}
+                </button>
+              ))}
+              <button 
+                onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
+                className="w-full mt-4 bg-[#06C755] text-white py-4 rounded font-bold text-lg animate-pulse"
+              >
+                LINEで資料をもらう
+              </button>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {/* --- Hero Section (FV) --- */}
+      <div className="relative pt-20 bg-black min-h-screen flex items-center overflow-hidden">
+        {/* Dynamic Background Slideshow */}
+        {heroImages.map((img, index) => (
+          <div 
+            key={index}
+            className={`absolute inset-0 z-0 transition-opacity duration-1000 ${index === heroImageIndex ? 'opacity-60' : 'opacity-0'}`}
+          >
+            <img 
+              src={img} 
+              alt={`Hero ${index}`} 
+              className="w-full h-full object-cover mix-blend-hard-light scale-105 animate-[pulse_10s_infinite]"
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-0"></div>
+        <div className="bg-noise absolute inset-0 z-0"></div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 w-full py-12 md:py-0">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            
+            <div className="w-full md:w-3/4 text-left">
+              {/* BIG BADGE */}
+              <div className="inline-block relative mb-6 group cursor-pointer hover:scale-105 transition-transform">
+                <div className="absolute inset-0 bg-red-600 transform skew-x-[-12deg] blur-lg opacity-50 animate-pulse"></div>
+                <div className="relative bg-yellow-400 text-black font-black px-8 py-2 transform skew-x-[-12deg] border-4 border-black">
+                   <span className="block skew-x-[12deg] text-2xl md:text-4xl tracking-tighter">
+                     <span className="text-red-600">4月開講</span> 第3期生
+                   </span>
+                </div>
+              </div>
+
+              {/* MAIN TITLE - SUPER BIG */}
+              <h1 className="relative mb-6 leading-none">
+                <span className="block text-4xl md:text-6xl font-black text-white italic mb-2 text-stroke-red opacity-80">JAPAN ACTION CREATOR</span>
+                <span className="block text-7xl md:text-9xl font-black text-white tracking-tighter transform -skew-x-6 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
+                  生徒募集
+                </span>
+                <span className="block text-xl md:text-3xl font-bold text-gray-300 mt-4 tracking-widest border-l-4 border-red-600 pl-4 bg-black/60 inline-block p-2">
+                   アクション × 映像編集 × 自己プロデュース
+                </span>
+              </h1>
+              
+              <div className="flex flex-col sm:flex-row gap-6 mt-10">
+                 <button 
+                   onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
+                   className="group relative bg-red-600 text-white font-black py-6 px-12 text-2xl shadow-[0_0_40px_rgba(255,0,0,0.6)] hover:bg-red-500 transition-all skew-x-[-12deg] hover:scale-105 active:scale-95 border-b-8 border-red-800 active:border-b-0 active:translate-y-2"
+                 >
+                   <div className="flex items-center justify-center gap-3 skew-x-[12deg]">
+                     <Zap className="fill-yellow-400 text-yellow-400 animate-pulse" /> 
+                     <span>今すぐ応募する</span>
+                   </div>
+                 </button>
+              </div>
+              <p className="text-white/80 font-bold mt-4 tracking-widest uppercase text-sm animate-pulse flex items-center gap-2">
+                <AlertTriangle className="text-yellow-400" size={16}/> 定員迫る：残りわずか8名
+              </p>
+            </div>
+
+            {/* Visual: Impact Image Cluster */}
+            <div className="hidden md:block w-1/4 relative animate-on-scroll delay-200">
+               <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
+                  <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop" 
+                    alt="Hero Action" 
+                    className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all"
+                  />
+                  <div className="absolute bottom-4 right-[-20px] bg-black text-white font-black text-4xl px-4 py-2 transform -rotate-6 border-2 border-white">
+                    <span className="text-yellow-400">LAST</span> 8
+                  </div>
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- DREAM SECTION --- */}
+      <section id="dream" className="py-24 bg-zinc-950 relative overflow-hidden">
+        <div className="absolute inset-0 bg-noise opacity-20"></div>
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <div className="mb-16 animate-on-scroll">
+            <h2 className="text-3xl md:text-5xl font-black text-gray-500 mb-6 italic">
+              あなたにも、ありませんか？
+            </h2>
+            <div className="inline-block relative">
+              <div className="absolute inset-0 bg-red-600 transform skew-y-2 scale-110 -z-10"></div>
+              <p className="text-4xl md:text-7xl font-black text-white leading-tight italic px-8 py-4 transform -skew-y-2">
+                「ヒーローになりたかった」<br/>
+                あの日描いた夢が。
+              </p>
+            </div>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8 text-left mb-12">
+            <div className="bg-zinc-900/80 p-6 border-l-4 border-yellow-400 animate-on-scroll delay-100">
+              <p className="text-xl font-bold text-gray-300">
+                テレビの中で飛び回るスタントマンを見て、<span className="text-white text-2xl">「俺も、私も！」</span>と胸を焦がしたあの頃。
+              </p>
+            </div>
+            <div className="bg-zinc-900/80 p-6 border-l-4 border-red-600 animate-on-scroll delay-200">
+              <p className="text-xl font-bold text-gray-300">
+                でも大人になり、<span className="line-through text-gray-600">「安定しなきゃ」</span><span className="line-through text-gray-600">「もういい歳だし」</span>と、夢に蓋をして生きてきませんでしたか？
+              </p>
+            </div>
+          </div>
+
+          <div className="py-8 animate-on-scroll delay-300">
+             <p className="text-4xl md:text-6xl font-black text-white transform -rotate-2">
+               その想い、<br className="md:hidden"/><span className="text-red-600 text-stroke">墓場まで持っていく気か？</span>
+             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* --- PHOTO GALLERY (NEW & VISUAL) --- */}
+      <section id="gallery" className="py-20 bg-black overflow-hidden">
+        <div className="text-center mb-10">
+          <span className="text-red-600 font-black tracking-widest uppercase text-xl bg-white px-2">VISUALIZE YOUR FUTURE</span>
+          <h2 className="text-white text-5xl md:text-7xl font-impact italic mt-2">ACTION <span className="text-transparent text-stroke">SCENES</span></h2>
+        </div>
+
+        {/* Masonry-style Grid with Slanted edges */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 px-2 h-[600px] md:h-[800px] transform skew-x-[-6deg] scale-105">
+           {[
+             "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2072&auto=format&fit=crop", // Jump
+             "https://images.unsplash.com/photo-1626245358826-3b655a6d3f23?q=80&w=2071&auto=format&fit=crop", // Kick
+             "https://images.unsplash.com/photo-1533561052604-c3bec69dc27d?q=80&w=2080&auto=format&fit=crop", // Stunt
+             "https://images.unsplash.com/photo-1505391691753-3769c9b16867?q=80&w=2074&auto=format&fit=crop", // Parkour
+             "https://images.unsplash.com/photo-1574717432707-c2571f90b795?q=80&w=2070&auto=format&fit=crop", // Edit
+             "https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=2070&auto=format&fit=crop", // Camera
+             "https://images.unsplash.com/photo-1526404987550-609db2c92589?q=80&w=2071&auto=format&fit=crop", // Sword
+             "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop"  // Training
+           ].map((src, i) => (
+             <div key={i} className={`relative overflow-hidden group border-2 border-black ${i === 0 || i === 4 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`}>
+               <img src={src} alt="Action" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 transform skew-x-[6deg] scale-110" />
+               <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+             </div>
+           ))}
+        </div>
+        <div className="text-center mt-8">
+           <p className="text-gray-400 text-sm">※ 画像はイメージです。実際の稽古はさらに熱気があります。</p>
+        </div>
+      </section>
+
+      {/* --- Authority Ticker --- */}
+      <div className="bg-yellow-400 text-black py-4 border-y-4 border-black overflow-hidden relative z-20 shadow-xl rotate-1">
+        <div className="flex animate-[marquee_20s_linear_infinite] whitespace-nowrap gap-12 font-black text-2xl uppercase italic">
+          {[...Array(10)].map((_, i) => (
+            <React.Fragment key={i}>
+              <span className="flex items-center gap-2">🔥 4月開講 3期生募集</span>
+              <span className="flex items-center gap-2">★ 年齢不問</span>
+              <span className="flex items-center gap-2">★ 未経験歓迎</span>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+      <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
+
+      {/* --- MENTORS (LEGENDS SECTION) --- */}
+      <section id="mentors" className="py-32 bg-zinc-950 text-white relative">
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+         <div className="max-w-7xl mx-auto px-4 relative z-10">
+            <div className="text-center mb-24 animate-on-scroll">
+               <span className="text-yellow-400 font-black tracking-[0.5em] uppercase text-sm md:text-lg block mb-4 animate-pulse">
+                  Japan Action Guild Presents
+               </span>
+               <h2 className="text-5xl md:text-8xl font-impact italic text-white leading-none">
+                  THE <span className="text-red-600 text-stroke-black">LEGENDS</span>
+               </h2>
+               <p className="text-xl md:text-2xl font-bold mt-6 max-w-2xl mx-auto text-gray-300">
+                  日本を代表するアクション集団。<br/>
+                  <span className="text-white border-b-2 border-red-600">ここしかない</span>最強の講師陣。
+               </p>
+            </div>
+
+            <div className="grid md:grid-cols-4 gap-4">
+               {[
+                 {
+                   name_jp: "谷垣 健治",
+                   name_en: "KENJI TANIGAKI",
+                   img: "face-tanigaki.jpg"
+                 },
+                 {
+                   name_jp: "下村 勇二",
+                   name_en: "YUJI SHIMOMURA",
+                   img: "face-shimomura.jpg"
+                 },
+                 {
+                   name_jp: "横山 誠",
+                   name_en: "MAKOTO YOKOYAMA",
+                   img: "face-yokoyama.jpg"
+                 },
+                 {
+                   name_jp: "辻井 啓伺",
+                   name_en: "KEIJI TSUJII",
+                   img: "face-tuji.jpg"
+                 },
+                 {
+                   name_jp: "玉井 雅利",
+                   name_en: "MASATOSHI TAMAI",
+                   img: "face.tamai.png"
+                 },
+                 {
+                   name_jp: "多加野 詩子",
+                   name_en: "UTAKO TAKANO",
+                   img: "face-takano.jpg"
+                 },
+                 {
+                   name_jp: "渡辺 竜平",
+                   name_en: "RYUHEI WATANABE",
+                   img: "fae.Ryoheiv2.jpg"
+                 },
+                 {
+                   name_jp: "矢部 大",
+                   name_en: "DAI YABE",
+                   img: "face-yabe.jpg"
+                 }
+               ].map((mentor, i) => (
+                 <div key={i} className="group relative h-[400px] overflow-hidden border border-zinc-800 hover:border-red-600 transition-colors duration-500 animate-on-scroll" style={{transitionDelay: `${i*100}ms`}}>
+                    {/* Image */}
+                    <img 
+                      src={mentor.img} 
+                      alt={mentor.name_en} 
+                      className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop";
+                      }}
+                    />
+                    
+                    {/* Overlay Gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-500"></div>
+
+                    {/* Content */}
+                    <div className="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                       <div className="bg-red-600 w-8 h-1 mb-2 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                       <p className="text-yellow-500 font-bold tracking-widest text-[10px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">JAG SPECIAL INSTRUCTOR</p>
+                       <h3 className="text-2xl font-black text-white italic leading-none mb-1">{mentor.name_jp}</h3>
+                       <p className="text-gray-400 font-impact text-lg uppercase leading-none">{mentor.name_en}</p>
+                    </div>
+                 </div>
+               ))}
+            </div>
+
+            {/* Special Guests Section */}
+            <div className="mt-16 bg-zinc-900 border border-zinc-700 p-8 rounded-xl relative overflow-hidden animate-on-scroll">
+               <div className="absolute top-0 right-0 p-4 opacity-10">
+                  <Star size={100} className="text-yellow-400" />
+               </div>
+               <div className="relative z-10 text-center md:text-left flex flex-col md:flex-row items-center gap-8">
+                  <div className="flex-shrink-0 bg-yellow-400 text-black font-black p-4 rounded-full w-24 h-24 flex items-center justify-center text-center leading-tight shadow-lg transform rotate-[-6deg]">
+                     <span>SPECIAL<br/>GUESTS</span>
+                  </div>
+                  <div className="flex-grow">
+                     <h3 className="text-2xl font-black text-white mb-2">その他、業界の最前線で活躍するプロフェッショナル多数</h3>
+                     <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium">
+                        映画配給やプランナー、舞台演出家などエンタメ作品に関わるプロの特別授業を予定。<br/>
+                        第一線の現場で活動している人員のため、リモート特別授業あるいは対面授業にて、日程調整後に受講者にお伝えします。
+                     </p>
+                     <div className="flex flex-wrap gap-4 mt-4">
+                        <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Mic2 size={12}/> 特別講義</span>
+                        <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Globe size={12}/> リモート対応</span>
+                        <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Users size={12}/> 現場連携</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+         </div>
+      </section>
+
+      {/* --- Problem (Active Style) --- */}
+      <section className="py-24 bg-gray-100 clip-diagonal-reverse relative z-0">
+        <div className="max-w-6xl mx-auto px-4 mt-12">
+           <div className="grid md:grid-cols-2 gap-16 items-center">
+             <div className="order-2 md:order-1 animate-on-scroll">
+                <h2 className="text-4xl md:text-6xl font-black text-black mb-8 leading-none italic">
+                  こんな時代だからこそ、<br/>
+                  <span className="text-white bg-black px-2">「やりたいこと」</span>をやる。
+                </h2>
+                <p className="text-gray-800 text-xl mb-8 font-bold border-l-4 border-red-600 pl-4">
+                  AIが台頭し、単純作業が淘汰される時代。<br/>
+                  最後に残るのは、<span className="bg-yellow-300 px-1">人の心を動かす「熱狂」</span>だけ。
+                </p>
+                <div className="space-y-6">
+                  {['我慢して働く毎日に飽き飽きしている', '「どうせ無理」が口癖になっている', '誰かの心に残る何かを成し遂げたい'].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4 group">
+                      <div className="w-12 h-12 bg-black text-white flex items-center justify-center font-black text-xl skew-x-[-12deg] group-hover:bg-red-600 transition-colors">
+                        <AlertTriangle size={24} className="skew-x-[12deg]" />
+                      </div>
+                      <p className="font-bold text-lg md:text-xl text-gray-800 group-hover:translate-x-2 transition-transform">{item}</p>
+                    </div>
+                  ))}
+                </div>
+             </div>
+             <div className="order-1 md:order-2 relative animate-on-scroll delay-200">
+                <div className="absolute inset-0 bg-red-600 transform rotate-3 rounded-3xl translate-x-4 translate-y-4"></div>
+                <img 
+                   src="https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?q=80&w=2069&auto=format&fit=crop" 
+                   alt="Audience"
+                   className="relative rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 z-10"
+                />
+             </div>
+           </div>
+        </div>
+      </section>
+
+      {/* --- 3 WEAPONS (Image Heavy) --- */}
+      <section id="about" className="py-32 bg-zinc-900 text-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="mb-20 animate-on-scroll text-center md:text-left">
+            <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-4">
+              THREE <span className="text-transparent text-stroke">WEAPONS</span>
+            </h2>
+            <p className="text-xl md:text-2xl font-bold text-red-500">プロになるための3つの武器</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                num: "01",
+                title: "Top-Tier Mentors",
+                sub: "業界最高峰の指導陣",
+                desc: "JAGのトップスタントマン・アクション監督が直接指導。現場の「リアル」と「安全性」を叩き込む。",
+                img: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"
+              },
+              {
+                num: "02",
+                title: "Creative Skills",
+                sub: "撮影 × 編集スキル",
+                desc: "ただ動けるだけじゃ食っていけない。Premiere Pro、カメラワーク、演出。「自分を売る」技術を習得。",
+                img: "https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=2070&auto=format&fit=crop"
+              },
+              {
+                num: "03",
+                title: "Connections",
+                sub: "圧倒的なコネクション",
+                desc: "JAG直営だからこそ、映画・ドラマ・CMの案件が豊富。卒業＝プロデビューへの最短ルート。",
+                img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+              }
+            ].map((item, i) => (
+              <div key={i} className="group relative h-[500px] animate-on-scroll border-2 border-zinc-700 hover:border-yellow-400 transition-colors" style={{transitionDelay: `${i*100}ms`}}>
+                <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500 filter grayscale group-hover:grayscale-0" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-8 w-full">
+                   <div className="bg-red-600 text-white font-black inline-block px-2 mb-2">{item.num}</div>
+                   <h3 className="text-3xl font-impact uppercase text-white mb-1">{item.title}</h3>
+                   <p className="text-yellow-400 font-bold text-lg mb-4">{item.sub}</p>
+                   <p className="text-sm text-gray-300 group-hover:text-white transition-colors">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- Curriculum (Visual Timeline) --- */}
+      <section id="curriculum" className="py-24 bg-red-600 relative overflow-hidden">
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
+         <div className="max-w-6xl mx-auto px-4 relative z-10">
+            <h2 className="text-5xl md:text-7xl font-black text-white text-center mb-16 italic uppercase drop-shadow-md">
+              Training <span className="text-black">Roadmap</span>
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-8">
+               {[
+                 { stage: "STAGE 01", title: "鋼の肉体と基礎技術", img: "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop" },
+                 { stage: "STAGE 02", title: "武器アクション & 応用", img: "https://images.unsplash.com/photo-1615672965681-305886470087?q=80&w=2070&auto=format&fit=crop" },
+                 { stage: "STAGE 03", title: "撮影・カメラワーク", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop" },
+                 { stage: "STAGE 04", title: "編集 & デモリール制作", img: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2000&auto=format&fit=crop" },
+               ].map((item, i) => (
+                 <div key={i} className="relative h-64 bg-black group overflow-hidden border-4 border-black animate-on-scroll">
+                    <img src={item.img} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                    <div className="absolute bottom-6 left-6">
+                       <span className="block text-yellow-400 font-bold tracking-widest text-sm mb-1">{item.stage}</span>
+                       <h3 className="text-2xl md:text-3xl font-black text-white italic">{item.title}</h3>
+                    </div>
+                    <div className="absolute top-4 right-4 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
+                       <ArrowRight size={20} />
+                    </div>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
+      {/* --- FAQ (Updated) --- */}
+      <section id="faq" className="py-24 bg-zinc-950 text-white border-t border-zinc-800">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-4xl md:text-6xl font-black text-center mb-12 uppercase italic">
+            Q & A <span className="text-red-600">Session</span>
+          </h2>
+
+          <div className="space-y-2">
+            {[
+              { 
+                q: "初心者でも大丈夫ですか？", 
+                a: "大丈夫です！アクションや映像未経験の方でも問題ありません。大切なのは「情熱」です。「アクション映画を作りたい」「プロの技術を学びたい」という熱い気持ちがあれば、基礎から徹底的にサポートします。" 
+              },
+              { 
+                q: "パソコンは必要ですか？", 
+                a: "基本的には必要になります。対面授業時はハイスペックPCを貸与しますが、自宅での課題制作やリモート授業の際はご自身のPCが必要となります。" 
+              },
+              { 
+                q: "使用する動画編集ソフトは？", 
+                a: "授業では業界標準の「Adobe Premiere Pro」「After Effects」「DaVinci Resolve」を使用します。課題制作については、Final Cutなど使い慣れたソフトの使用も可能です。" 
+              },
+              { 
+                q: "応募条件や年齢制限はありますか？", 
+                a: "心身ともに健康で、熱心に取り組める方であれば、原則12歳以上から応募可能です。未成年の方は保護者の同意が必要となります。" 
+              },
+              { 
+                q: "仕事をしながら通えますか？", 
+                a: "もちろんです。週末や夜間のカリキュラムを中心に、社会人や学生の方でも無理なくプロを目指せるスケジュールを組んでいます。" 
+              }
+            ].map((item, i) => (
+              <div key={i} className="border-b border-zinc-800">
+                <button 
+                  onClick={() => toggleAccordion(i)}
+                  className="w-full py-6 flex justify-between items-center text-left hover:text-red-500 transition-colors group"
+                >
+                  <span className="text-lg md:text-xl font-bold flex gap-4 items-start">
+                    <span className="text-red-600 font-impact text-2xl mt-[-2px]">Q.</span> 
+                    <span className="leading-snug">{item.q}</span>
+                  </span>
+                  <ChevronDown className={`transform transition-transform flex-shrink-0 ${activeAccordion === i ? 'rotate-180 text-red-600' : 'text-gray-500'}`} />
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${activeAccordion === i ? 'max-h-60 opacity-100 pb-8' : 'max-h-0 opacity-0'}`}>
+                  <div className="flex gap-4 pl-2 md:pl-4">
+                     <span className="text-yellow-400 font-impact text-2xl mt-[-2px]">A.</span>
+                     <p className="text-gray-300 leading-relaxed font-medium">
+                       {item.a}
+                     </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- Founder Message (Cinematic) --- */}
+      <section id="passion" className="py-32 bg-white relative">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-16 items-center">
+           <div className="md:w-1/2 animate-on-scroll relative">
+              <div className="absolute inset-0 bg-red-600 transform translate-x-4 translate-y-4"></div>
+              <img 
+                 src="https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop" 
+                 alt="Founder" 
+                 className="relative w-full grayscale contrast-125 border-4 border-black z-10"
+              />
+           </div>
+           <div className="md:w-1/2 animate-on-scroll delay-200">
+              <h2 className="text-5xl font-black mb-8 italic leading-none">
+                DON'T GIVE UP<br/>
+                <span className="text-red-600 text-stroke-black">YOUR DREAM.</span>
+              </h2>
+              <p className="text-lg font-bold text-gray-800 leading-relaxed mb-6">
+                「本当に、そのままでいいんですか？」<br/><br/>
+                泥だらけで追いかけた夢。安定なんてクソ食らえ。<br/>
+                生きてる実感が欲しいなら、ここに来い。<br/><br/>
+                やる理由は一つでいい。<br/>
+                <span className="bg-black text-white px-2">「やりたいから、やる。」</span>
+              </p>
+              <div className="border-l-4 border-red-600 pl-4">
+                <p className="font-black text-xl">Japan Action Guild</p>
+                <p className="text-gray-500 text-sm font-bold uppercase">Representative Director</p>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      {/* --- FINAL CTA (Explosive) --- */}
+      <section className="py-32 bg-black relative overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0">
+           <img src="https://images.unsplash.com/photo-1533561052604-c3bec69dc27d?q=80&w=2080&auto=format&fit=crop" className="w-full h-full object-cover opacity-30" />
+           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto px-4 text-center relative z-10 animate-on-scroll">
+          <p className="text-black font-black text-xl mb-4 bg-yellow-400 inline-block px-6 py-1 transform skew-x-[-12deg] shadow-[5px_5px_0_white]">
+            <span className="block skew-x-[12deg]">4月開講 第3期生</span>
+          </p>
+          <h2 className="text-6xl md:text-9xl font-impact text-white mb-4 italic drop-shadow-2xl text-stroke-red">
+            LAST <span className="text-white">08</span> SPOTS
+          </h2>
+          <p className="text-2xl font-bold text-gray-300 mb-12 max-w-2xl mx-auto">
+            迷っている暇はない。<br/>
+            定員に達した瞬間、この扉は閉ざされる。
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+             <button 
+               onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
+               className="group relative bg-red-600 text-white w-full md:w-auto px-12 py-6 text-2xl font-black italic shadow-[0_0_30px_red] hover:bg-white hover:text-red-600 transition-colors duration-300 transform skew-x-[-12deg]"
+             >
+                <span className="flex items-center justify-center gap-3 skew-x-[12deg]">
+                  <Zap className="fill-current animate-bounce" /> 
+                  LINEで覚悟を決める
+                </span>
+             </button>
+             <button 
+                className="group relative border-4 border-white text-white w-full md:w-auto px-10 py-5 text-xl font-bold italic hover:bg-white hover:text-black transition-colors duration-300 transform skew-x-[-12deg]"
+             >
+                <span className="flex items-center justify-center gap-3 skew-x-[12deg]">
+                  Zoomで相談する
+                </span>
+             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* --- Footer --- */}
+      <footer className="bg-black text-white py-12 border-t-8 border-red-600">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-4xl font-impact italic mb-4">JAPAN ACTION CREATOR</h2>
+          <div className="flex justify-center gap-6 mb-6">
+             <Instagram className="text-gray-500 hover:text-white cursor-pointer" />
+             <Twitter className="text-gray-500 hover:text-white cursor-pointer" />
+          </div>
+          <p className="text-gray-500 text-sm font-bold tracking-widest uppercase">
+            © Japan Action Guild. All Rights Reserved.
+          </p>
+        </div>
+      </footer>
+
+      {/* --- Sticky Mobile CTA --- */}
+      <div className={`fixed bottom-4 left-4 right-4 z-50 transition-transform duration-500 md:hidden ${showFloatingBtn ? 'translate-y-0' : 'translate-y-[150%]'}`}>
+        <div className="bg-black/95 backdrop-blur-md p-2 rounded-lg border-2 border-red-600 shadow-2xl flex gap-3">
+          <button 
+             onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
+             className="flex-1 bg-red-600 text-white font-black py-4 rounded text-base flex flex-col items-center justify-center leading-none gap-1 animate-pulse shadow-lg"
+          >
+            <span className="text-xs text-yellow-300 block">4月開講 3期生</span>
+            <span className="flex items-center gap-1"><Zap size={16} className="fill-white" /> 残り8名！応募する</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  );
+};
+
+export default App;
