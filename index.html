@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JAPAN ACTION CREATOR | 生徒募集</title>
     
+    <!-- SEO Meta Tags -->
+    <title>JAPAN ACTION CREATOR | アクション×映像編集 プロ養成スクール | 3期生募集</title>
+    <meta name="description" content="【4月開講 3期生募集中】ジャパンアクションギルド(JAG)直営。日本最高峰のアクション監督・スタントマンから学ぶ「アクション×映像編集×自己プロデュース」。YouTuber、動画編集者、CMディレクター志望者へ。アクション撮影スキルでクリエイター上位1%を目指せ。">
+    <meta name="keywords" content="アクションスクール,スタントマン,殺陣,映像編集,Premiere Pro,YouTuber,CMディレクター,俳優養成所,ジャパンアクションギルド,JAG,アクション撮影">
+    
+    <!-- OGP (SNSシェア用) -->
+    <meta property="og:title" content="JAPAN ACTION CREATOR | クリエイター上位1%への最短ルート">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://school.japanactionguild.jp/">
+    <meta property="og:image" content="./kingdm.jpg">
+    <meta property="og:description" content="動画編集者・YouTuber・監督志望へ。「アクション撮影」という最強の武器を手に入れろ。日本最高峰の講師陣が教えるプロ養成講座。残りわずか8名！">
+    <meta property="og:site_name" content="JAPAN ACTION CREATOR">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@2021_JAG">
+    <meta name="twitter:title" content="JAPAN ACTION CREATOR | 3期生緊急募集">
+    <meta name="twitter:description" content="映像編集を極めたいなら、アクションを知れ。最強の講師陣とカリキュラムで、あなたの市場価値を劇的に高める。">
+    <meta name="twitter:image" content="./kingdm.jpg">
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Babel (JSXをブラウザで動かすために必要) -->
+    <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     
     <!-- Tailwind CSS -->
@@ -65,7 +85,7 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // アイコンコンポーネント (LucideのアイコンをReactコンポーネントとしてラップ)
+        // Icons
         const IconWrapper = ({ name, size = 24, className = "" }) => {
             useEffect(() => {
                 lucide.createIcons();
@@ -73,7 +93,6 @@
             return <i data-lucide={name} width={size} height={size} className={className}></i>;
         };
 
-        // 各アイコンの定義
         const Zap = (props) => <IconWrapper name="zap" {...props} />;
         const MessageCircle = (props) => <IconWrapper name="message-circle" {...props} />;
         const Menu = (props) => <IconWrapper name="menu" {...props} />;
@@ -90,6 +109,10 @@
         const Users = (props) => <IconWrapper name="users" {...props} />;
         const Instagram = (props) => <IconWrapper name="instagram" {...props} />;
         const Twitter = (props) => <IconWrapper name="twitter" {...props} />;
+        const Share2 = (props) => <IconWrapper name="share-2" {...props} />;
+        const Video = (props) => <IconWrapper name="video" {...props} />;
+        const Aperture = (props) => <IconWrapper name="aperture" {...props} />;
+        const MonitorPlay = (props) => <IconWrapper name="monitor-play" {...props} />;
 
         const App = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -97,10 +120,23 @@
             const [activeAccordion, setActiveAccordion] = useState(null);
             const [heroImageIndex, setHeroImageIndex] = useState(0);
 
+            // Provided local images
             const heroImages = [
-                "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1536769947700-c97559c5d18d?q=80&w=1978&auto=format&fit=crop",
-                "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"
+                "./kingdm.jpg",
+                "./imafge.JPG",
+                "./IMG_6189.JPG"
+            ];
+
+            // Gallery images allocation
+            const galleryImages = [
+                "./IMG_4459.JPG",
+                "./IMG_4169.JPG",
+                "./IMG_2640.JPG",
+                "./IMG_0655.jpg",
+                "./kingdm.jpg", // Reuse for impact
+                "./IMG_6189.JPG", // Reuse
+                "./imafge.JPG", // Reuse
+                "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop" // Fallback/Filler
             ];
 
             useEffect(() => {
@@ -147,9 +183,33 @@
                 setActiveAccordion(activeAccordion === index ? null : index);
             };
 
+            // SNS Share Function
+            const shareUrl = "https://school.japanactionguild.jp/";
+            const shareText = "JAPAN ACTION CREATOR | 動画編集×アクション。クリエイター上位1%への最短ルート。最強の講師陣と学ぶプロ養成スクール #JAG";
+
+            const shareToTwitter = () => {
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+            };
+
+            const shareToLine = () => {
+                window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`, '_blank');
+            };
+
             return (
-                <div className="font-sans text-gray-800 bg-black min-h-screen pb-24 md:pb-0 overflow-x-hidden selection:bg-yellow-400 selection:text-black">
+                <div className="font-sans text-gray-800 bg-black min-h-screen pb-24 md:pb-0 overflow-x-hidden selection:bg-yellow-400 selection:text-black relative">
                     
+                    {/* Floating Share Buttons (Right Side) */}
+                    <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
+                        <button onClick={shareToTwitter} className="bg-black text-white p-3 rounded-full hover:bg-white hover:text-black border border-white transition-all shadow-lg group">
+                            <Twitter size={24} />
+                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on X</span>
+                        </button>
+                        <button onClick={shareToLine} className="bg-[#06C755] text-white p-3 rounded-full hover:scale-110 transition-all shadow-lg group">
+                            <MessageCircle size={24} />
+                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on LINE</span>
+                        </button>
+                    </div>
+
                     {/* Header */}
                     <header className="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b-2 border-red-600 shadow-2xl">
                         <div className="max-w-7xl mx-auto px-4">
@@ -187,21 +247,19 @@
                         {isMenuOpen && (
                             <div className="md:hidden bg-zinc-900 border-t-2 border-red-600 absolute w-full shadow-2xl">
                                 <div className="px-4 pt-2 pb-6 space-y-2">
-                                    {['dream', 'gallery', 'mentors', 'curriculum'].map((id, i) => (
+                                    {['dream', 'creators', 'gallery', 'mentors', 'curriculum'].map((id, i) => (
                                         <button 
                                             key={i}
                                             onClick={() => scrollToSection(id)} 
                                             className="block w-full text-left py-4 text-white font-black text-xl italic border-b border-gray-800 hover:text-red-500 hover:pl-2 transition-all"
                                         >
-                                            {['夢への挑戦', 'ギャラリー', '講師紹介', 'カリキュラム'][i]}
+                                            {['夢への挑戦', 'クリエイターへ', 'ギャラリー', '講師紹介', 'カリキュラム'][i]}
                                         </button>
                                     ))}
-                                    <button 
-                                        onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
-                                        className="w-full mt-4 bg-[#06C755] text-white py-4 rounded font-bold text-lg animate-pulse"
-                                    >
-                                        LINEで資料をもらう
-                                    </button>
+                                    <div className="flex gap-4 pt-4 justify-center border-t border-gray-800 mt-2">
+                                        <button onClick={shareToTwitter} className="flex items-center gap-2 bg-black border border-white px-4 py-2 rounded text-sm"><Twitter size={16}/> Xで拡散</button>
+                                        <button onClick={shareToLine} className="flex items-center gap-2 bg-[#06C755] px-4 py-2 rounded text-sm"><MessageCircle size={16}/> LINEで送る</button>
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -218,6 +276,10 @@
                                     src={img} 
                                     alt={`Hero ${index}`} 
                                     className="w-full h-full object-cover mix-blend-hard-light scale-105 animate-[pulse_10s_infinite]"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop";
+                                    }}
                                 />
                             </div>
                         ))}
@@ -266,9 +328,10 @@
                                     <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
                                         <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
                                         <img 
-                                            src="https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop" 
+                                            src="./kingdm.jpg"
                                             alt="Hero Action" 
                                             className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all"
+                                            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }}
                                         />
                                         <div className="absolute bottom-4 right-[-20px] bg-black text-white font-black text-4xl px-4 py-2 transform -rotate-6 border-2 border-white">
                                             <span className="text-yellow-400">LAST</span> 8
@@ -317,6 +380,74 @@
                         </div>
                     </section>
 
+                    {/* NEW SECTION: CREATOR'S STRATEGY */}
+                    <section id="creators" className="py-24 bg-red-700 relative overflow-hidden clip-diagonal-reverse z-10">
+                        <div className="absolute inset-0 bg-noise opacity-50"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                        
+                        <div className="max-w-7xl mx-auto px-4 relative z-10">
+                            <div className="flex flex-col md:flex-row items-center gap-12">
+                                <div className="md:w-3/5 text-left animate-on-scroll">
+                                    <div className="inline-block bg-white text-red-700 font-black px-4 py-1 transform -skew-x-12 mb-4">
+                                        <span className="block skew-x-12 text-sm md:text-base tracking-widest">FOR VIDEO EDITORS & DIRECTORS</span>
+                                    </div>
+                                    <h2 className="text-4xl md:text-6xl font-black text-white mb-6 italic leading-tight">
+                                        動画編集者・YouTuberへ告ぐ。<br/>
+                                        <span className="text-yellow-400">「アクション撮影」</span>という<br/>
+                                        最強の武器を手に入れろ。
+                                    </h2>
+                                    <div className="space-y-6 text-lg font-bold text-gray-200">
+                                        <p>
+                                            綺麗な映像なら、誰でも撮れる時代だ。<br/>
+                                            再生数が伸びない？ 案件単価が上がらない？<br/>
+                                            それはあなたの映像に<span className="text-white border-b-2 border-white">「熱」と「衝撃」</span>が足りないからだ。
+                                        </p>
+                                        <p>
+                                            アクションを知れば、カット割りが変わる。<br/>
+                                            カメラワークが劇的に進化する。<br/>
+                                            観る者の心拍数を操る、唯一無二の映像が作れるようになる。
+                                        </p>
+                                        <p class="text-2xl text-yellow-400 italic">
+                                            「アクションが撮れるエディター」<br/>
+                                            この市場価値の高さを、想像してほしい。
+                                        </p>
+                                    </div>
+                                    
+                                    <div className="mt-8 flex flex-wrap gap-4">
+                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
+                                            <Video className="text-red-500" /> <span className="text-sm font-bold">CMディレクター志望</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
+                                            <MonitorPlay className="text-red-500" /> <span className="text-sm font-bold">YouTuber</span>
+                                        </div>
+                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
+                                            <Aperture className="text-red-500" /> <span className="text-sm font-bold">PV/MV制作</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="md:w-2/5 animate-on-scroll delay-200">
+                                    <div className="bg-black p-8 rounded-xl border-4 border-white shadow-2xl transform rotate-3">
+                                        <h3 className="text-2xl font-black text-center mb-6 text-yellow-400 uppercase italic">THE STRATEGY</h3>
+                                        <ul className="space-y-4">
+                                            <li className="flex items-start gap-3">
+                                                <CheckCircle className="text-red-600 flex-shrink-0" />
+                                                <span className="font-bold text-sm">ありきたりな編集からの脱却</span>
+                                            </li>
+                                            <li className="flex items-start gap-3">
+                                                <CheckCircle className="text-red-600 flex-shrink-0" />
+                                                <span className="font-bold text-sm">自ら演じて撮る「説得力」あるディレクション</span>
+                                            </li>
+                                            <li className="flex items-start gap-3">
+                                                <CheckCircle className="text-red-600 flex-shrink-0" />
+                                                <span className="font-bold text-sm">上位1%のクリエイターへランクアップ</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     {/* Gallery Section */}
                     <section id="gallery" className="py-20 bg-black overflow-hidden">
                         <div className="text-center mb-10">
@@ -325,24 +456,23 @@
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 px-2 h-[600px] md:h-[800px] transform skew-x-[-6deg] scale-105">
-                            {[
-                                "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2072&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1626245358826-3b655a6d3f23?q=80&w=2071&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1533561052604-c3bec69dc27d?q=80&w=2080&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1505391691753-3769c9b16867?q=80&w=2074&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1574717432707-c2571f90b795?q=80&w=2070&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=2070&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1526404987550-609db2c92589?q=80&w=2071&auto=format&fit=crop",
-                                "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop"
-                            ].map((src, i) => (
+                            {galleryImages.map((src, i) => (
                                 <div key={i} className={`relative overflow-hidden group border-2 border-black ${i === 0 || i === 4 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`}>
-                                    <img src={src} alt="Action" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 transform skew-x-[6deg] scale-110" />
+                                    <img 
+                                        src={src} 
+                                        alt="Action" 
+                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 transform skew-x-[6deg] scale-110"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2072&auto=format&fit=crop";
+                                        }}
+                                    />
                                     <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                             ))}
                         </div>
                         <div className="text-center mt-8">
-                            <p className="text-gray-400 text-sm">※ 画像はイメージです。実際の稽古はさらに熱気があります。</p>
+                            <p className="text-gray-400 text-sm">※ 実際の稽古風景イメージ</p>
                         </div>
                     </section>
 
@@ -483,6 +613,37 @@
                         </div>
                     </section>
 
+                    {/* Curriculum (Visual Timeline) */}
+                    <section id="curriculum" className="py-24 bg-red-600 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
+                        <div className="max-w-6xl mx-auto px-4 relative z-10">
+                            <h2 className="text-5xl md:text-7xl font-black text-white text-center mb-16 italic uppercase drop-shadow-md">
+                                Training <span className="text-black">Roadmap</span>
+                            </h2>
+
+                            <div className="grid md:grid-cols-2 gap-8">
+                                {[
+                                    { stage: "STAGE 01", title: "鋼の肉体と基礎技術", img: "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop" },
+                                    { stage: "STAGE 02", title: "武器アクション & 応用", img: "https://images.unsplash.com/photo-1615672965681-305886470087?q=80&w=2070&auto=format&fit=crop" },
+                                    { stage: "STAGE 03", title: "撮影・カメラワーク", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop" },
+                                    { stage: "STAGE 04", title: "編集 & デモリール制作", img: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2000&auto=format&fit=crop" },
+                                ].map((item, i) => (
+                                    <div key={i} className="relative h-64 bg-black group overflow-hidden border-4 border-black animate-on-scroll">
+                                        <img src={item.img} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+                                        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                                        <div className="absolute bottom-6 left-6">
+                                            <span className="block text-yellow-400 font-bold tracking-widest text-sm mb-1">{item.stage}</span>
+                                            <h3 className="text-2xl md:text-3xl font-black text-white italic">{item.title}</h3>
+                                        </div>
+                                        <div className="absolute top-4 right-4 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
+                                            <ArrowRight size={20} />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
                     {/* FAQ Section */}
                     <section id="faq" className="py-24 bg-zinc-950 text-white border-t border-zinc-800">
                         <div className="max-w-3xl mx-auto px-4">
@@ -553,12 +714,12 @@
                     </section>
 
                     {/* Footer */}
-                    <footer className="bg-black text-white py-12 border-t-8 border-red-600">
+                    <footer className="bg-black text-white py-12 border-t-8 border-red-600 relative z-20">
                         <div className="max-w-7xl mx-auto px-4 text-center">
                             <h2 className="text-4xl font-impact italic mb-4">JAPAN ACTION CREATOR</h2>
                             <div className="flex justify-center gap-6 mb-6">
-                                <Instagram className="text-gray-500 hover:text-white cursor-pointer" />
-                                <Twitter className="text-gray-500 hover:text-white cursor-pointer" />
+                                <a href="https://www.instagram.com/2021_jag/" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white cursor-pointer"><Instagram /></a>
+                                <a href="https://twitter.com/2021_JAG" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white cursor-pointer"><Twitter /></a>
                             </div>
                             <p className="text-gray-500 text-sm font-bold tracking-widest uppercase">
                                 © Japan Action Guild. All Rights Reserved.
