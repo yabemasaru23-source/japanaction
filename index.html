@@ -6,8 +6,24 @@
     
     <!-- SEO Meta Tags -->
     <title>JAPAN ACTION CREATOR | アクション×映像編集 プロ養成スクール | 3期生募集</title>
-    <meta name="description" content="【4月開講 3期生募集中】ジャパンアクションギルド(JAG)直営。日本最高峰のアクション監督・スタントマンから学ぶ「アクション×映像編集×自己プロデュース」。">
+    <meta name="description" content="【4月開講 3期生募集中】ジャパンアクションギルド(JAG)直営。日本最高峰のアクション監督・スタントマンから学ぶ「アクション×映像編集×自己プロデュース」。YouTuber、動画編集者、CMディレクター志望者へ。">
     
+    <!-- OGP (SNSシェア用) -->
+    <meta property="og:title" content="JAPAN ACTION CREATOR | クリエイター上位1%への最短ルート">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://school.japanactionguild.jp/">
+    <meta property="og:image" content="./sozai01.jpg">
+    <meta property="og:description" content="動画編集者・YouTuber・監督志望へ。「アクション撮影」という最強の武器を手に入れろ。日本最高峰の講師陣が教えるプロ養成講座。残りわずか8名！">
+    <meta property="og:site_name" content="JAPAN ACTION CREATOR">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@2021_JAG">
+    <meta name="twitter:title" content="JAPAN ACTION CREATOR | 3期生緊急募集">
+    <meta name="twitter:description" content="映像編集を極めたいなら、アクションを知れ。最強の講師陣とカリキュラムで、あなたの市場価値を劇的に高める。">
+    <meta name="twitter:image" content="./sozai01.jpg">
+
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -61,7 +77,7 @@
             animation: marquee 20s linear infinite;
         }
 
-        /* YouTube Background Wrapper */
+        /* YouTube/Video Background Wrapper */
         .video-background {
             position: absolute;
             top: 0;
@@ -76,16 +92,12 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 300%; 
-            height: 300%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             transform: translate(-50%, -50%);
-            pointer-events: none;
-        }
-        @media (min-aspect-ratio: 16/9) {
-            .video-foreground { height: 300%; top: -100%; }
-        }
-        @media (max-aspect-ratio: 16/9) {
-            .video-foreground { width: 300%; left: -100%; }
+            object-fit: cover;
         }
     </style>
 </head>
@@ -119,29 +131,35 @@
         const Users = (props) => <IconWrapper name="users" {...props} />;
         const Instagram = (props) => <IconWrapper name="instagram" {...props} />;
         const Twitter = (props) => <IconWrapper name="twitter" {...props} />;
+        const Share2 = (props) => <IconWrapper name="share-2" {...props} />;
         const Video = (props) => <IconWrapper name="video" {...props} />;
         const Aperture = (props) => <IconWrapper name="aperture" {...props} />;
         const MonitorPlay = (props) => <IconWrapper name="monitor-play" {...props} />;
+        const Play = (props) => <IconWrapper name="play" {...props} />;
 
         const App = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
             const [showFloatingBtn, setShowFloatingBtn] = useState(false);
             const [activeAccordion, setActiveAccordion] = useState(null);
 
-            // ★背景動画の設定 (YouTube ID)★
-            const heroYoutubeId = "vH4UQHAeCgI"; 
+            // ★重要：動画ファイルの設定★
+            // GitHubにアップロードする動画ファイル名を 'top_movie.mp4' にしてください
+            const heroVideoFile = "./top_movie.mp4"; 
+
+            // プロモーション用YouTube動画ID (下部のセクション用)
+            // こちらはYouTubeのままにしておきます
             const promotionVideoId = "vH4UQHAeCgI";
 
-            // Gallery images allocation
+            // ★画像設定 (sozaiシリーズに変更)★
             const galleryImages = [
-                "./IMG_4459.JPG",
-                "./IMG_4169.JPG",
-                "./IMG_2640.JPG",
-                "./IMG_0655.jpg",
-                "./kingdm.jpg",
-                "./IMG_6189.JPG",
-                "./imafge.JPG",
-                "./IMG_4459.JPG"
+                "./sozai01.jpg",
+                "./sozai02.jpg",
+                "./sozai03.jpg",
+                "./sozai04.jpg",
+                "./sozai05.jpg",
+                "./sozai07.jpg",
+                "./sozai08.jpg",
+                "./sozai09.jpg"
             ];
 
             useEffect(() => {
@@ -199,9 +217,11 @@
                     <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
                         <button onClick={shareToTwitter} className="bg-black text-white p-3 rounded-full hover:bg-white hover:text-black border border-white transition-all shadow-lg group">
                             <Twitter size={24} />
+                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on X</span>
                         </button>
                         <button onClick={shareToLine} className="bg-[#06C755] text-white p-3 rounded-full hover:scale-110 transition-all shadow-lg group">
                             <MessageCircle size={24} />
+                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on LINE</span>
                         </button>
                     </div>
 
@@ -260,20 +280,22 @@
                         )}
                     </header>
 
-                    {/* Hero Section (YouTube Background) */}
+                    {/* Hero Section (Local Video Background) */}
                     <div className="relative pt-20 bg-black min-h-screen flex items-center overflow-hidden">
                         
-                        {/* YouTube Background */}
+                        {/* Video Background */}
                         <div className="video-background">
-                            <div className="video-foreground">
-                                <iframe 
-                                    src={`https://www.youtube.com/embed/${heroYoutubeId}?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&playlist=${heroYoutubeId}&mute=1&disablekb=1&iv_load_policy=3&playsinline=1`} 
-                                    frameBorder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowFullScreen
-                                    className="w-full h-full pointer-events-none"
-                                ></iframe>
-                            </div>
+                            <video 
+                                autoPlay 
+                                loop 
+                                muted 
+                                playsInline 
+                                className="video-foreground"
+                            >
+                                <source src={heroVideoFile} type="video/mp4" />
+                                {/* フォールバック画像 */}
+                                <img src="./sozai01.jpg" alt="Hero Fallback" className="w-full h-full object-cover" />
+                            </video>
                         </div>
 
                         {/* Overlays */}
@@ -322,8 +344,9 @@
                                 <div className="hidden md:block w-1/4 relative animate-on-scroll delay-200">
                                     <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
                                         <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
+                                        {/* トップ画像エリア: 動画がない場合のフォールバックや、横に添えるイメージとしてsozai01を使用 */}
                                         <img 
-                                            src="./kingdm.jpg"
+                                            src="./sozai01.jpg"
                                             alt="Hero Action" 
                                             className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all"
                                             onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }}
@@ -339,6 +362,7 @@
 
                     {/* Dream Section */}
                     <section id="dream" className="py-24 bg-zinc-950 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-noise opacity-20"></div>
                         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                             <div className="mb-16 animate-on-scroll">
                                 <h2 className="text-3xl md:text-5xl font-black text-gray-500 mb-6 italic">
@@ -571,6 +595,11 @@
                                             映画配給やプランナー、舞台演出家などエンタメ作品に関わるプロの特別授業を予定。<br/>
                                             第一線の現場で活動している人員のため、リモート特別授業あるいは対面授業にて、日程調整後に受講者にお伝えします。
                                         </p>
+                                        <div className="flex flex-wrap gap-4 mt-4">
+                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Mic2 size={12}/> 特別講義</span>
+                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Globe size={12}/> リモート対応</span>
+                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Users size={12}/> 現場連携</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
