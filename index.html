@@ -120,10 +120,7 @@
             const [activeAccordion, setActiveAccordion] = useState(null);
 
             // ★設定★
-            // 動画ファイル名 (GitHubにアップロードしてください)
             const heroVideoFile = "./top_movie.mp4"; 
-            
-            // プロモーション用YouTube動画ID
             const promotionVideoId = "vH4UQHAeCgI"; 
             
             // ギャラリー画像リスト
@@ -138,16 +135,16 @@
                 "./gazousozai009.jpg"
             ];
 
-            // 講師リスト (ファイル名厳守)
+            // 講師リスト (ファイル名変更済み)
             const mentors = [
                 { name_jp: "谷垣 健治", name_en: "KENJI TANIGAKI", img: "./face-tanigaki.jpg" },
                 { name_jp: "下村 勇二", name_en: "YUJI SHIMOMURA", img: "./face-shimomura.jpg" },
                 { name_jp: "横山 誠", name_en: "MAKOTO YOKOYAMA", img: "./face-yokoyama.jpg" },
                 { name_jp: "辻井 啓伺", name_en: "KEIJI TSUJII", img: "./face-tuji.jpg" },
-                { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" }, // png注意
+                { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" },
                 { name_jp: "多加野 詩子", name_en: "UTAKO TAKANO", img: "./face-takano.jpg" },
-                { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" }, // fae注意
-                { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" }
+                { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" },
+                { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./about-image2.png" } // 修正: about-image2.png
             ];
 
             useEffect(() => {
@@ -530,9 +527,9 @@
                         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-16 items-center">
                             <div className="md:w-1/2 animate-on-scroll relative">
                                 <div className="absolute inset-0 bg-red-600 transform translate-x-4 translate-y-4"></div>
-                                {/* 代表の写真も face-yabe.jpg に変更 */}
+                                {/* 代表の写真も about-image2.png に変更 */}
                                 <img 
-                                    src="./about-image2.png 
+                                    src="./about-image2.png" 
                                     alt="Founder" 
                                     className="relative w-full grayscale contrast-125 border-4 border-black z-10"
                                 />
@@ -581,4 +578,3 @@
     </script>
 </body>
 </html>
-
