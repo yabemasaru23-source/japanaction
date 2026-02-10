@@ -47,9 +47,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .delay-100 { transition-delay: 0.1s; }
-        .delay-200 { transition-delay: 0.2s; }
-        .delay-300 { transition-delay: 0.3s; }
 
         .text-stroke { -webkit-text-stroke: 1px white; color: transparent; }
         .text-stroke-black { -webkit-text-stroke: 1px black; color: transparent; }
@@ -123,10 +120,13 @@
             const [activeAccordion, setActiveAccordion] = useState(null);
 
             // ★設定★
+            // 動画ファイル名 (GitHubにアップロードしてください)
             const heroVideoFile = "./top_movie.mp4"; 
-            const promotionVideoId = "vH4UQHAeCgI"; // YouTubeプロモーション用
             
-            // ★新しい画像素材リスト★
+            // プロモーション用YouTube動画ID
+            const promotionVideoId = "vH4UQHAeCgI"; 
+            
+            // ギャラリー画像リスト
             const galleryImages = [
                 "./gazousozai001.jpg", 
                 "./gazousozai002.jpg", 
@@ -136,6 +136,18 @@
                 "./gazousozai006.jpg", 
                 "./gazousozai007.jpg", 
                 "./gazousozai009.jpg"
+            ];
+
+            // 講師リスト (ファイル名厳守)
+            const mentors = [
+                { name_jp: "谷垣 健治", name_en: "KENJI TANIGAKI", img: "./face-tanigaki.jpg" },
+                { name_jp: "下村 勇二", name_en: "YUJI SHIMOMURA", img: "./face-shimomura.jpg" },
+                { name_jp: "横山 誠", name_en: "MAKOTO YOKOYAMA", img: "./face-yokoyama.jpg" },
+                { name_jp: "辻井 啓伺", name_en: "KEIJI TSUJII", img: "./face-tuji.jpg" },
+                { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" }, // png注意
+                { name_jp: "多加野 詩子", name_en: "UTAKO TAKANO", img: "./face-takano.jpg" },
+                { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" }, // fae注意
+                { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" }
             ];
 
             useEffect(() => {
@@ -220,7 +232,6 @@
                         <div className="video-background">
                             <video autoPlay loop muted playsInline className="video-foreground">
                                 <source src={heroVideoFile} type="video/mp4" />
-                                {/* フォールバック画像も新しい素材に変更 */}
                                 <img src="./gazousozai001.jpg" alt="Hero Fallback" className="w-full h-full object-cover" />
                             </video>
                         </div>
@@ -260,10 +271,10 @@
                                 <div className="hidden md:block w-1/4 relative animate-on-scroll delay-200">
                                     <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
                                         <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
-                                        {/* トップのイメージ画像も更新 */}
+                                        {/* トップ画像 */}
                                         <img src="./gazousozai001.jpg" alt="Hero Action" className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }} />
                                         
-                                        {/* バッジデザイン修正：日本語で読みやすく */}
+                                        {/* 定員枠バッジ */}
                                         <div className="absolute bottom-4 right-[-40px] bg-red-600 text-white font-black text-2xl px-6 py-4 transform -rotate-6 border-4 border-white shadow-xl z-20 text-center leading-none">
                                             <span className="block text-sm mb-1">残り</span>
                                             <span className="text-yellow-300 text-6xl">8</span><span className="text-xl">名</span>
@@ -302,7 +313,7 @@
                         </div>
                     </section>
 
-                    {/* Creator's Strategy (High Contrast) */}
+                    {/* Creator's Strategy */}
                     <section id="creators" className="py-24 bg-zinc-900 relative overflow-hidden clip-diagonal-reverse z-10">
                         <div className="absolute inset-0 bg-noise opacity-50"></div>
                         <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -333,7 +344,7 @@
                         </div>
                     </section>
 
-                    {/* Gallery (Updated with new Images) */}
+                    {/* Gallery (Updated) */}
                     <section id="gallery" className="py-20 bg-black overflow-hidden">
                         <div className="text-center mb-10">
                             <h2 className="text-white text-5xl md:text-7xl font-impact italic mt-2">ACTION <span className="text-transparent text-stroke">SCENES</span></h2>
@@ -348,7 +359,7 @@
                         </div>
                     </section>
 
-                    {/* Mentors */}
+                    {/* Mentors (Updated Names and Images) */}
                     <section id="mentors" className="py-32 bg-zinc-950 text-white relative">
                         <div className="max-w-7xl mx-auto px-4 relative z-10">
                             <div className="text-center mb-24 animate-on-scroll">
@@ -356,16 +367,7 @@
                                 <p className="text-xl md:text-2xl font-bold mt-6 text-gray-300">ここしかない最強の講師陣。</p>
                             </div>
                             <div className="grid md:grid-cols-4 gap-4">
-                                {[
-                                    { name_jp: "谷垣 健治", name_en: "KENJI TANIGAKI", img: "./face-tanigaki.jpg" },
-                                    { name_jp: "下村 勇二", name_en: "YUJI SHIMOMURA", img: "./face-shimomura.jpg" },
-                                    { name_jp: "横山 誠", name_en: "MAKOTO YOKOYAMA", img: "./face-yokoyama.jpg" },
-                                    { name_jp: "辻井 啓伺", name_en: "KEIJI TSUJII", img: "./face-tuji.jpg" },
-                                    { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" },
-                                    { name_jp: "多加野 詩子", name_en: "UTAKO TAKANO", img: "./face-takano.jpg" },
-                                    { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" },
-                                    { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" } // Changed Name to MASARU
-                                ].map((mentor, i) => (
+                                {mentors.map((mentor, i) => (
                                     <div key={i} className="group relative h-[400px] overflow-hidden border border-zinc-800 hover:border-red-600 transition-colors duration-500 animate-on-scroll" style={{transitionDelay: `${i*100}ms`}}>
                                         <img src={mentor.img} alt={mentor.name_en} className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop"; }} />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-500"></div>
@@ -523,13 +525,14 @@
                         </div>
                     </section>
 
-                    {/* Passion Section */}
+                    {/* Passion Section (Fixing broken link) */}
                     <section id="passion" className="py-32 bg-white relative">
                         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row gap-16 items-center">
                             <div className="md:w-1/2 animate-on-scroll relative">
                                 <div className="absolute inset-0 bg-red-600 transform translate-x-4 translate-y-4"></div>
+                                {/* 代表の写真も face-yabe.jpg に変更 */}
                                 <img 
-                                    src="https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop" 
+                                    src="./face-yabe.jpg" 
                                     alt="Founder" 
                                     className="relative w-full grayscale contrast-125 border-4 border-black z-10"
                                 />
