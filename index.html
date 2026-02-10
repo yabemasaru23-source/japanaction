@@ -8,31 +8,24 @@
     <title>JAPAN ACTION CREATOR | アクション×映像編集 プロ養成スクール | 3期生募集</title>
     <meta name="description" content="【4月開講 3期生募集中】ジャパンアクションギルド(JAG)直営。日本最高峰のアクション監督・スタントマンから学ぶ「アクション×映像編集×自己プロデュース」。YouTuber、動画編集者、CMディレクター志望者へ。">
     
-    <!-- OGP (SNSシェア用) -->
+    <!-- OGP -->
     <meta property="og:title" content="JAPAN ACTION CREATOR | クリエイター上位1%への最短ルート">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://school.japanactionguild.jp/">
     <meta property="og:image" content="./sozai01.jpg">
-    <meta property="og:description" content="動画編集者・YouTuber・監督志望へ。「アクション撮影」という最強の武器を手に入れろ。日本最高峰の講師陣が教えるプロ養成講座。残りわずか8名！">
+    <meta property="og:description" content="動画編集者・YouTuber・監督志望へ。「アクション撮影」という最強の武器を手に入れろ。日本最高峰の講師陣が教えるプロ養成講座。残り8名定員枠！">
     <meta property="og:site_name" content="JAPAN ACTION CREATOR">
     <meta property="og:locale" content="ja_JP">
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@2021_JAG">
-    <meta name="twitter:title" content="JAPAN ACTION CREATOR | 3期生緊急募集">
-    <meta name="twitter:description" content="映像編集を極めたいなら、アクションを知れ。最強の講師陣とカリキュラムで、あなたの市場価値を劇的に高める。">
-    <meta name="twitter:image" content="./sozai01.jpg">
-
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
@@ -47,12 +40,12 @@
         /* Animations */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(30px) skewX(-5deg);
+            transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .animate-on-scroll.visible {
             opacity: 1;
-            transform: translateY(0) skewX(0);
+            transform: translateY(0);
         }
         .delay-100 { transition-delay: 0.1s; }
         .delay-200 { transition-delay: 0.2s; }
@@ -77,27 +70,16 @@
             animation: marquee 20s linear infinite;
         }
 
-        /* YouTube/Video Background Wrapper */
+        /* Video Background */
         .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 0;
         }
         .video-foreground {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            position: absolute; top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%; width: auto; height: auto;
+            transform: translate(-50%, -50%); object-fit: cover;
         }
     </style>
 </head>
@@ -109,9 +91,7 @@
 
         // Icons Helper
         const IconWrapper = ({ name, size = 24, className = "" }) => {
-            useEffect(() => {
-                lucide.createIcons();
-            });
+            useEffect(() => { lucide.createIcons(); });
             return <i data-lucide={name} width={size} height={size} className={className}></i>;
         };
 
@@ -120,109 +100,63 @@
         const Menu = (props) => <IconWrapper name="menu" {...props} />;
         const X = (props) => <IconWrapper name="x" {...props} />;
         const AlertTriangle = (props) => <IconWrapper name="alert-triangle" {...props} />;
-        const ArrowRight = (props) => <IconWrapper name="arrow-right" {...props} />;
         const CheckCircle = (props) => <IconWrapper name="check-circle" {...props} />;
         const ChevronDown = (props) => <IconWrapper name="chevron-down" {...props} />;
         const Star = (props) => <IconWrapper name="star" {...props} />;
-        const Flame = (props) => <IconWrapper name="flame" {...props} />;
-        const Trophy = (props) => <IconWrapper name="trophy" {...props} />;
         const Mic2 = (props) => <IconWrapper name="mic-2" {...props} />;
         const Globe = (props) => <IconWrapper name="globe" {...props} />;
         const Users = (props) => <IconWrapper name="users" {...props} />;
         const Instagram = (props) => <IconWrapper name="instagram" {...props} />;
         const Twitter = (props) => <IconWrapper name="twitter" {...props} />;
-        const Share2 = (props) => <IconWrapper name="share-2" {...props} />;
         const Video = (props) => <IconWrapper name="video" {...props} />;
-        const Aperture = (props) => <IconWrapper name="aperture" {...props} />;
         const MonitorPlay = (props) => <IconWrapper name="monitor-play" {...props} />;
-        const Play = (props) => <IconWrapper name="play" {...props} />;
+        const Aperture = (props) => <IconWrapper name="aperture" {...props} />;
+        const Flag = (props) => <IconWrapper name="flag" {...props} />;
+        const Sword = (props) => <IconWrapper name="sword" {...props} />;
+        const Camera = (props) => <IconWrapper name="camera" {...props} />;
+        const Award = (props) => <IconWrapper name="award" {...props} />;
+        const Briefcase = (props) => <IconWrapper name="briefcase" {...props} />;
 
         const App = () => {
             const [isMenuOpen, setIsMenuOpen] = useState(false);
             const [showFloatingBtn, setShowFloatingBtn] = useState(false);
             const [activeAccordion, setActiveAccordion] = useState(null);
 
-            // ★重要：動画ファイルの設定★
-            // GitHubにアップロードする動画ファイル名を 'top_movie.mp4' にしてください
+            // ★設定★
             const heroVideoFile = "./top_movie.mp4"; 
-
-            // プロモーション用YouTube動画ID (下部のセクション用)
-            // こちらはYouTubeのままにしておきます
             const promotionVideoId = "vH4UQHAeCgI";
-
-            // ★画像設定 (sozaiシリーズに変更)★
-            const galleryImages = [
-                "./sozai01.jpg",
-                "./sozai02.jpg",
-                "./sozai03.jpg",
-                "./sozai04.jpg",
-                "./sozai05.jpg",
-                "./sozai07.jpg",
-                "./sozai08.jpg",
-                "./sozai09.jpg"
-            ];
+            const galleryImages = ["./sozai01.jpg", "./sozai02.jpg", "./sozai03.jpg", "./sozai04.jpg", "./sozai05.jpg", "./sozai07.jpg", "./sozai08.jpg", "./sozai09.jpg"];
 
             useEffect(() => {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                        }
+                        if (entry.isIntersecting) entry.target.classList.add('visible');
                     });
                 }, { threshold: 0.1 });
+                document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-                document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                    observer.observe(el);
-                });
-
-                const handleScroll = () => {
-                    setShowFloatingBtn(window.scrollY > 600);
-                };
+                const handleScroll = () => setShowFloatingBtn(window.scrollY > 600);
                 window.addEventListener('scroll', handleScroll);
                 lucide.createIcons();
-                
-                return () => {
-                    window.removeEventListener('scroll', handleScroll);
-                    observer.disconnect();
-                };
+                return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
             const scrollToSection = (id) => {
                 const element = document.getElementById(id);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
                 setIsMenuOpen(false);
             };
 
-            const toggleAccordion = (index) => {
-                setActiveAccordion(activeAccordion === index ? null : index);
-            };
-
-            const shareUrl = "https://school.japanactionguild.jp/";
-            const shareText = "JAPAN ACTION CREATOR | クリエイター上位1%への最短ルート #JAG";
-
-            const shareToTwitter = () => {
-                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
-            };
-
-            const shareToLine = () => {
-                window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`, '_blank');
-            };
+            const toggleAccordion = (index) => setActiveAccordion(activeAccordion === index ? null : index);
+            const openLine = () => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank');
 
             return (
                 <div className="font-sans text-gray-800 bg-black min-h-screen pb-24 md:pb-0 overflow-x-hidden selection:bg-yellow-400 selection:text-black relative">
                     
-                    {/* Share Buttons (Right) */}
+                    {/* Floating Share (PC) */}
                     <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-40 hidden md:flex flex-col gap-3">
-                        <button onClick={shareToTwitter} className="bg-black text-white p-3 rounded-full hover:bg-white hover:text-black border border-white transition-all shadow-lg group">
-                            <Twitter size={24} />
-                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on X</span>
-                        </button>
-                        <button onClick={shareToLine} className="bg-[#06C755] text-white p-3 rounded-full hover:scale-110 transition-all shadow-lg group">
-                            <MessageCircle size={24} />
-                            <span className="absolute right-full mr-2 bg-white text-black text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Share on LINE</span>
-                        </button>
+                        <button onClick={() => window.open('https://twitter.com/intent/tweet?url=https://school.japanactionguild.jp/','_blank')} className="bg-black text-white p-3 rounded-full hover:bg-white hover:text-black border border-white transition-all shadow-lg"><Twitter size={24} /></button>
+                        <button onClick={() => window.open('https://line.me/R/msg/text/?https://school.japanactionguild.jp/','_blank')} className="bg-[#06C755] text-white p-3 rounded-full hover:scale-110 transition-all shadow-lg"><MessageCircle size={24} /></button>
                     </div>
 
                     {/* Header */}
@@ -230,7 +164,7 @@
                         <div className="max-w-7xl mx-auto px-4">
                             <div className="flex items-center justify-between h-16 md:h-20">
                                 <div className="flex-shrink-0 cursor-pointer group" onClick={() => window.scrollTo(0,0)}>
-                                    <div className="flex flex-col transform group-hover:-skew-x-12 transition-transform duration-300">
+                                    <div className="flex flex-col">
                                         <span className="text-[10px] md:text-xs text-yellow-400 font-black tracking-widest uppercase">Action & Creative School</span>
                                         <span className="text-xl md:text-3xl font-impact text-white tracking-wider italic">
                                             JAPAN ACTION <span className="text-red-600">CREATOR</span>
@@ -241,10 +175,7 @@
                                     <div className="bg-yellow-400 text-black px-4 py-1 skew-x-[-12deg] animate-pulse">
                                         <span className="block skew-x-[12deg] font-black text-sm">4月開講 3期生募集中</span>
                                     </div>
-                                    <button 
-                                        onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
-                                        className="bg-red-600 text-white px-6 py-2 font-black italic hover:bg-white hover:text-red-600 transition-colors duration-300 skew-x-[-12deg] shadow-[0_0_15px_rgba(220,38,38,0.5)]"
-                                    >
+                                    <button onClick={openLine} className="bg-red-600 text-white px-6 py-2 font-black italic hover:bg-white hover:text-red-600 transition-colors duration-300 skew-x-[-12deg] shadow-[0_0_15px_rgba(220,38,38,0.5)]">
                                         <span className="flex items-center gap-2 skew-x-[12deg]">
                                             <MessageCircle size={18} /> LINEで相談
                                         </span>
@@ -257,64 +188,44 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        {/* Mobile Menu */}
                         {isMenuOpen && (
                             <div className="md:hidden bg-zinc-900 border-t-2 border-red-600 absolute w-full shadow-2xl">
                                 <div className="px-4 pt-2 pb-6 space-y-2">
-                                    {['dream', 'creators', 'gallery', 'mentors', 'curriculum'].map((id, i) => (
-                                        <button 
-                                            key={i}
-                                            onClick={() => scrollToSection(id)} 
-                                            className="block w-full text-left py-4 text-white font-black text-xl italic border-b border-gray-800 hover:text-red-500 hover:pl-2 transition-all"
-                                        >
-                                            {['夢への挑戦', 'クリエイターへ', 'ギャラリー', '講師紹介', 'カリキュラム'][i]}
+                                    {['dream', 'movie', 'creators', 'gallery', 'mentors', 'curriculum'].map((id, i) => (
+                                        <button key={i} onClick={() => scrollToSection(id)} className="block w-full text-left py-4 text-white font-black text-xl italic border-b border-gray-800 hover:text-red-500 hover:pl-2 transition-all">
+                                            {['夢への挑戦', 'プロモーション', 'クリエイターへ', 'ギャラリー', '講師紹介', 'カリキュラム'][i]}
                                         </button>
                                     ))}
-                                    <div className="flex gap-4 pt-4 justify-center border-t border-gray-800 mt-2">
-                                        <button onClick={shareToTwitter} className="flex items-center gap-2 bg-black border border-white px-4 py-2 rounded text-sm"><Twitter size={16}/> Xで拡散</button>
-                                        <button onClick={shareToLine} className="flex items-center gap-2 bg-[#06C755] px-4 py-2 rounded text-sm"><MessageCircle size={16}/> LINEで送る</button>
-                                    </div>
+                                    <button onClick={openLine} className="w-full mt-4 bg-[#06C755] text-white py-4 rounded font-bold text-lg animate-pulse flex items-center justify-center gap-2">
+                                        <MessageCircle /> LINEで資料をもらう
+                                    </button>
                                 </div>
                             </div>
                         )}
                     </header>
 
-                    {/* Hero Section (Local Video Background) */}
+                    {/* Hero Section */}
                     <div className="relative pt-20 bg-black min-h-screen flex items-center overflow-hidden">
-                        
-                        {/* Video Background */}
                         <div className="video-background">
-                            <video 
-                                autoPlay 
-                                loop 
-                                muted 
-                                playsInline 
-                                className="video-foreground"
-                            >
+                            <video autoPlay loop muted playsInline className="video-foreground">
                                 <source src={heroVideoFile} type="video/mp4" />
-                                {/* フォールバック画像 */}
                                 <img src="./sozai01.jpg" alt="Hero Fallback" className="w-full h-full object-cover" />
                             </video>
                         </div>
-
-                        {/* Overlays */}
                         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-0 pointer-events-none"></div>
                         <div className="bg-noise absolute inset-0 z-0 pointer-events-none"></div>
 
-                        {/* Hero Content */}
                         <div className="relative z-10 max-w-7xl mx-auto px-4 w-full py-12 md:py-0">
                             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                                 <div className="w-full md:w-3/4 text-left">
                                     <div className="inline-block relative mb-6 group cursor-pointer hover:scale-105 transition-transform">
                                         <div className="absolute inset-0 bg-red-600 transform skew-x-[-12deg] blur-lg opacity-50 animate-pulse"></div>
-                                        <div className="relative bg-yellow-400 text-black font-black px-8 py-2 transform skew-x-[-12deg] border-4 border-black">
+                                        <div className="relative bg-yellow-400 text-black font-black px-8 py-2 transform skew-x-[-12deg] border-4 border-black shadow-[5px_5px_0_rgba(0,0,0,0.5)]">
                                             <span className="block skew-x-[12deg] text-2xl md:text-4xl tracking-tighter">
                                                 <span className="text-red-600">4月開講</span> 第3期生
                                             </span>
                                         </div>
                                     </div>
-
                                     <h1 className="relative mb-6 leading-none">
                                         <span className="block text-4xl md:text-6xl font-black text-white italic mb-2 text-stroke-red opacity-80">JAPAN ACTION CREATOR</span>
                                         <span className="block text-7xl md:text-9xl font-black text-white tracking-tighter transform -skew-x-6 drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)]">
@@ -324,35 +235,22 @@
                                             アクション × 映像編集 × 自己プロデュース
                                         </span>
                                     </h1>
-                                    
                                     <div className="flex flex-col sm:flex-row gap-6 mt-10">
-                                        <button 
-                                            onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
-                                            className="group relative bg-red-600 text-white font-black py-6 px-12 text-2xl shadow-[0_0_40px_rgba(255,0,0,0.6)] hover:bg-red-500 transition-all skew-x-[-12deg] hover:scale-105 active:scale-95 border-b-8 border-red-800 active:border-b-0 active:translate-y-2"
-                                        >
+                                        <button onClick={openLine} className="group relative bg-red-600 text-white font-black py-6 px-12 text-xl shadow-[0_0_40px_rgba(255,0,0,0.6)] hover:bg-red-500 transition-all skew-x-[-12deg] hover:scale-105 active:scale-95 border-b-8 border-red-800 active:border-b-0 active:translate-y-2">
                                             <div className="flex items-center justify-center gap-3 skew-x-[12deg]">
                                                 <Zap className="fill-yellow-400 text-yellow-400 animate-pulse" /> 
-                                                <span>今すぐ応募する</span>
+                                                <span>スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
                                             </div>
                                         </button>
                                     </div>
-                                    <p className="text-white/80 font-bold mt-4 tracking-widest uppercase text-sm animate-pulse flex items-center gap-2">
-                                        <AlertTriangle className="text-yellow-400" size={16}/> 定員迫る：残りわずか8名
-                                    </p>
                                 </div>
 
                                 <div className="hidden md:block w-1/4 relative animate-on-scroll delay-200">
                                     <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
                                         <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
-                                        {/* トップ画像エリア: 動画がない場合のフォールバックや、横に添えるイメージとしてsozai01を使用 */}
-                                        <img 
-                                            src="./sozai01.jpg"
-                                            alt="Hero Action" 
-                                            className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all"
-                                            onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }}
-                                        />
-                                        <div className="absolute bottom-4 right-[-20px] bg-black text-white font-black text-4xl px-4 py-2 transform -rotate-6 border-2 border-white">
-                                            <span className="text-yellow-400">LAST</span> 8
+                                        <img src="./sozai08.jpg" alt="Hero Action" className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }} />
+                                        <div className="absolute bottom-4 right-[-40px] bg-red-600 text-white font-black text-3xl px-6 py-4 transform -rotate-6 border-4 border-white shadow-xl z-20">
+                                            残り<span className="text-yellow-300 text-5xl">8</span>名<br/><span className="text-sm">定員枠！</span>
                                         </div>
                                     </div>
                                 </div>
@@ -365,124 +263,52 @@
                         <div className="absolute inset-0 bg-noise opacity-20"></div>
                         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
                             <div className="mb-16 animate-on-scroll">
-                                <h2 className="text-3xl md:text-5xl font-black text-gray-500 mb-6 italic">
-                                    あなたにも、ありませんか？
-                                </h2>
-                                <div className="inline-block relative">
-                                    <div className="absolute inset-0 bg-red-600 transform skew-y-2 scale-110 -z-10"></div>
-                                    <p className="text-4xl md:text-7xl font-black text-white leading-tight italic px-8 py-4 transform -skew-y-2">
-                                        「ヒーローになりたかった」<br/>
-                                        あの日描いた夢が。
-                                    </p>
-                                </div>
+                                <h2 className="text-3xl md:text-5xl font-black text-gray-500 mb-6 italic">あなたにも、ありませんか？</h2>
+                                <p className="text-4xl md:text-7xl font-black text-white leading-tight italic px-8 py-4">「ヒーローになりたかった」<br/>あの日描いた夢が。</p>
                             </div>
-                            
-                            <div className="grid md:grid-cols-2 gap-8 text-left mb-12">
-                                <div className="bg-zinc-900/80 p-6 border-l-4 border-yellow-400 animate-on-scroll delay-100">
-                                    <p className="text-xl font-bold text-gray-300">
-                                        テレビの中で飛び回るスタントマンを見て、<span className="text-white text-2xl">「俺も、私も！」</span>と胸を焦がしたあの頃。
-                                    </p>
-                                </div>
-                                <div className="bg-zinc-900/80 p-6 border-l-4 border-red-600 animate-on-scroll delay-200">
-                                    <p className="text-xl font-bold text-gray-300">
-                                        でも大人になり、<span className="line-through text-gray-600">「安定しなきゃ」</span><span className="line-through text-gray-600">「もういい歳だし」</span>と、夢に蓋をして生きてきませんでしたか？
-                                    </p>
-                                </div>
-                            </div>
-
                             <div className="py-8 animate-on-scroll delay-300">
-                                <p className="text-4xl md:text-6xl font-black text-white transform -rotate-2">
-                                    その想い、<br className="md:hidden"/><span className="text-red-600 text-stroke">墓場まで持っていく気か？</span>
-                                </p>
+                                <p className="text-4xl md:text-6xl font-black text-white transform -rotate-2">その想い、<br class="md:hidden"/><span className="text-red-600 text-stroke">墓場まで持っていく気か？</span></p>
                             </div>
                         </div>
                     </section>
 
-                    {/* NEW SECTION: PROMOTION MOVIE (YouTube Embed) */}
+                    {/* Promotion Movie */}
                     <section id="movie" className="py-24 bg-black relative border-t border-b border-zinc-800">
                         <div className="max-w-5xl mx-auto px-4 text-center">
                             <div className="mb-10 animate-on-scroll">
                                 <span className="text-red-600 font-black tracking-widest uppercase bg-white text-black px-2 mb-2 inline-block">WATCH THE IMPACT</span>
                                 <h2 className="text-4xl md:text-6xl font-black text-white italic">PROMOTION <span className="text-transparent text-stroke">MOVIE</span></h2>
                             </div>
-                            
                             <div className="relative w-full aspect-video border-4 border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_50px_rgba(220,38,38,0.3)] animate-on-scroll delay-100 group">
-                                <iframe 
-                                    width="100%" 
-                                    height="100%" 
-                                    src={`https://www.youtube.com/embed/${promotionVideoId}?autoplay=0&controls=1&rel=0`} 
-                                    title="YouTube video player" 
-                                    frameBorder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowFullScreen
-                                    className="w-full h-full"
-                                ></iframe>
+                                <iframe width="100%" height="100%" src={`https://www.youtube.com/embed/${promotionVideoId}?autoplay=0&controls=1&rel=0`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="w-full h-full"></iframe>
                             </div>
-                            <p className="text-gray-400 mt-6 font-bold">※ 実際のトレーニング風景や、過去の作品例をご覧ください。</p>
                         </div>
                     </section>
 
-                    {/* CREATOR'S STRATEGY */}
-                    <section id="creators" className="py-24 bg-red-700 relative overflow-hidden clip-diagonal-reverse z-10">
+                    {/* Creator's Strategy (High Contrast) */}
+                    <section id="creators" className="py-24 bg-zinc-900 relative overflow-hidden clip-diagonal-reverse z-10">
                         <div className="absolute inset-0 bg-noise opacity-50"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
-                        
                         <div className="max-w-7xl mx-auto px-4 relative z-10">
                             <div className="flex flex-col md:flex-row items-center gap-12">
                                 <div className="md:w-3/5 text-left animate-on-scroll">
-                                    <div className="inline-block bg-white text-red-700 font-black px-4 py-1 transform -skew-x-12 mb-4">
-                                        <span className="block skew-x-12 text-sm md:text-base tracking-widest">FOR VIDEO EDITORS & DIRECTORS</span>
+                                    <div className="inline-block bg-yellow-400 text-black font-black px-4 py-1 transform -skew-x-12 mb-4">
+                                        <span className="block skew-x-12 text-sm md:text-base tracking-widest">動画編集者・監督志望の方へ</span>
                                     </div>
                                     <h2 className="text-4xl md:text-6xl font-black text-white mb-6 italic leading-tight">
-                                        動画編集者・YouTuberへ告ぐ。<br/>
-                                        <span className="text-yellow-400">「アクション撮影」</span>という<br/>
-                                        最強の武器を手に入れろ。
+                                        <span className="text-red-600">「アクション撮影」</span>という<br/>最強の武器を手に入れろ。
                                     </h2>
-                                    <div className="space-y-6 text-lg font-bold text-gray-200">
-                                        <p>
-                                            綺麗な映像なら、誰でも撮れる時代だ。<br/>
-                                            再生数が伸びない？ 案件単価が上がらない？<br/>
-                                            それはあなたの映像に<span className="text-white border-b-2 border-white">「熱」と「衝撃」</span>が足りないからだ。
-                                        </p>
-                                        <p>
-                                            アクションを知れば、カット割りが変わる。<br/>
-                                            カメラワークが劇的に進化する。<br/>
-                                            観る者の心拍数を操る、唯一無二の映像が作れるようになる。
-                                        </p>
-                                        <p className="text-2xl text-yellow-400 italic">
-                                            「アクションが撮れるエディター」<br/>
-                                            この市場価値の高さを、想像してほしい。
-                                        </p>
-                                    </div>
-                                    
-                                    <div className="mt-8 flex flex-wrap gap-4">
-                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
-                                            <Video className="text-red-500" /> <span className="text-sm font-bold">CMディレクター志望</span>
-                                        </div>
-                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
-                                            <MonitorPlay className="text-red-500" /> <span className="text-sm font-bold">YouTuber</span>
-                                        </div>
-                                        <div className="flex items-center gap-2 bg-black/50 px-4 py-2 rounded border border-white/30">
-                                            <Aperture className="text-red-500" /> <span className="text-sm font-bold">PV/MV制作</span>
-                                        </div>
+                                    <div className="space-y-6 text-lg font-bold text-gray-300">
+                                        <p>綺麗な映像なら、誰でも撮れる時代だ。<br/>あなたの映像に<span className="text-white border-b-2 border-red-600">「熱」と「衝撃」</span>を。</p>
+                                        <p>アクションを知れば、カット割りが変わる。<br/>カメラワークが劇的に進化する。</p>
                                     </div>
                                 </div>
                                 <div className="md:w-2/5 animate-on-scroll delay-200">
-                                    <div className="bg-black p-8 rounded-xl border-4 border-white shadow-2xl transform rotate-3">
-                                        <h3 className="text-2xl font-black text-center mb-6 text-yellow-400 uppercase italic">THE STRATEGY</h3>
-                                        <ul className="space-y-4">
-                                            <li className="flex items-start gap-3">
-                                                <CheckCircle className="text-red-600 flex-shrink-0" />
-                                                <span className="font-bold text-sm">ありきたりな編集からの脱却</span>
-                                            </li>
-                                            <li className="flex items-start gap-3">
-                                                <CheckCircle className="text-red-600 flex-shrink-0" />
-                                                <span className="font-bold text-sm">自ら演じて撮る「説得力」あるディレクション</span>
-                                            </li>
-                                            <li className="flex items-start gap-3">
-                                                <CheckCircle className="text-red-600 flex-shrink-0" />
-                                                <span className="font-bold text-sm">上位1%のクリエイターへランクアップ</span>
-                                            </li>
+                                    <div className="bg-black p-8 rounded-xl border-4 border-white shadow-[10px_10px_0_#DC2626] transform rotate-2">
+                                        <h3 className="text-3xl font-black text-center mb-6 text-yellow-400 italic">THE STRATEGY</h3>
+                                        <ul className="space-y-6 text-white text-lg font-bold">
+                                            <li className="flex items-start gap-3"><CheckCircle className="text-red-600 flex-shrink-0 mt-1" /> ありきたりな編集からの脱却</li>
+                                            <li className="flex items-start gap-3"><CheckCircle className="text-red-600 flex-shrink-0 mt-1" /> 自ら演じて撮る「説得力」あるディレクション</li>
+                                            <li className="flex items-start gap-3"><CheckCircle className="text-red-600 flex-shrink-0 mt-1" /> <span className="text-yellow-400 border-b border-yellow-400">上位1%のクリエイター</span>へランクアップ</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -490,64 +316,28 @@
                         </div>
                     </section>
 
-                    {/* Gallery Section */}
+                    {/* Gallery */}
                     <section id="gallery" className="py-20 bg-black overflow-hidden">
                         <div className="text-center mb-10">
-                            <span className="text-red-600 font-black tracking-widest uppercase text-xl bg-white px-2">VISUALIZE YOUR FUTURE</span>
                             <h2 className="text-white text-5xl md:text-7xl font-impact italic mt-2">ACTION <span className="text-transparent text-stroke">SCENES</span></h2>
                         </div>
-
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 px-2 h-[600px] md:h-[800px] transform skew-x-[-6deg] scale-105">
                             {galleryImages.map((src, i) => (
                                 <div key={i} className={`relative overflow-hidden group border-2 border-black ${i === 0 || i === 4 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`}>
-                                    <img 
-                                        src={src} 
-                                        alt="Action" 
-                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 transform skew-x-[6deg] scale-110"
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2072&auto=format&fit=crop";
-                                        }}
-                                    />
+                                    <img src={src} alt="Action" className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-500 transform skew-x-[6deg] scale-110" onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=2072&auto=format&fit=crop"; }} />
                                     <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </div>
                             ))}
                         </div>
-                        <div className="text-center mt-8">
-                            <p className="text-gray-400 text-sm">※ 実際の稽古風景イメージ</p>
-                        </div>
                     </section>
 
-                    {/* Ticker */}
-                    <div className="bg-yellow-400 text-black py-4 border-y-4 border-black overflow-hidden relative z-20 shadow-xl rotate-1">
-                        <div className="flex animate-marquee whitespace-nowrap gap-12 font-black text-2xl uppercase italic">
-                            {[...Array(10)].map((_, i) => (
-                                <React.Fragment key={i}>
-                                    <span className="flex items-center gap-2">🔥 4月開講 3期生募集</span>
-                                    <span className="flex items-center gap-2">★ 年齢不問</span>
-                                    <span className="flex items-center gap-2">★ 未経験歓迎</span>
-                                </React.Fragment>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Mentors Section */}
+                    {/* Mentors */}
                     <section id="mentors" className="py-32 bg-zinc-950 text-white relative">
-                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
                         <div className="max-w-7xl mx-auto px-4 relative z-10">
                             <div className="text-center mb-24 animate-on-scroll">
-                                <span className="text-yellow-400 font-black tracking-[0.5em] uppercase text-sm md:text-lg block mb-4 animate-pulse">
-                                    Japan Action Guild Presents
-                                </span>
-                                <h2 className="text-5xl md:text-8xl font-impact italic text-white leading-none">
-                                    THE <span className="text-red-600 text-stroke-black">LEGENDS</span>
-                                </h2>
-                                <p className="text-xl md:text-2xl font-bold mt-6 max-w-2xl mx-auto text-gray-300">
-                                    日本を代表するアクション集団。<br/>
-                                    <span className="text-white border-b-2 border-red-600">ここしかない</span>最強の講師陣。
-                                </p>
+                                <h2 className="text-5xl md:text-8xl font-impact italic text-white leading-none">THE <span className="text-red-600 text-stroke-black">LEGENDS</span></h2>
+                                <p className="text-xl md:text-2xl font-bold mt-6 text-gray-300">ここしかない最強の講師陣。</p>
                             </div>
-
                             <div className="grid md:grid-cols-4 gap-4">
                                 {[
                                     { name_jp: "谷垣 健治", name_en: "KENJI TANIGAKI", img: "./face-tanigaki.jpg" },
@@ -557,18 +347,10 @@
                                     { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" },
                                     { name_jp: "多加野 詩子", name_en: "UTAKO TAKANO", img: "./face-takano.jpg" },
                                     { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" },
-                                    { name_jp: "矢部 大", name_en: "DAI YABE", img: "./face-yabe.jpg" }
+                                    { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" } // Changed Name
                                 ].map((mentor, i) => (
                                     <div key={i} className="group relative h-[400px] overflow-hidden border border-zinc-800 hover:border-red-600 transition-colors duration-500 animate-on-scroll" style={{transitionDelay: `${i*100}ms`}}>
-                                        <img 
-                                            src={mentor.img} 
-                                            alt={mentor.name_en} 
-                                            className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" 
-                                            onError={(e) => {
-                                                e.target.onerror = null;
-                                                e.target.src = "https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop";
-                                            }}
-                                        />
+                                        <img src={mentor.img} alt={mentor.name_en} className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop"; }} />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-500"></div>
                                         <div className="absolute bottom-0 left-0 w-full p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
                                             <div className="bg-red-600 w-8 h-1 mb-2 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
@@ -579,26 +361,23 @@
                                     </div>
                                 ))}
                             </div>
-
-                            {/* Guest Section */}
-                            <div className="mt-16 bg-zinc-900 border border-zinc-700 p-8 rounded-xl relative overflow-hidden animate-on-scroll">
-                                <div className="absolute top-0 right-0 p-4 opacity-10">
-                                    <Star size={100} className="text-yellow-400" />
-                                </div>
-                                <div className="relative z-10 text-center md:text-left flex flex-col md:flex-row items-center gap-8">
-                                    <div className="flex-shrink-0 bg-yellow-400 text-black font-black p-4 rounded-full w-24 h-24 flex items-center justify-center text-center leading-tight shadow-lg transform rotate-[-6deg]">
-                                        <span>SPECIAL<br/>GUESTS</span>
+                            
+                            {/* Special Guests */}
+                            <div className="mt-16 bg-zinc-900 border border-zinc-700 p-10 rounded-xl relative overflow-hidden animate-on-scroll">
+                                <div className="relative z-10 text-center md:text-left flex flex-col md:flex-row items-center gap-10">
+                                    <div className="flex-shrink-0 bg-yellow-400 text-black font-black p-6 rounded-full w-32 h-32 flex items-center justify-center text-center leading-tight shadow-lg transform rotate-[-6deg]">
+                                        <span className="text-lg">SPECIAL<br/>GUESTS</span>
                                     </div>
                                     <div className="flex-grow">
-                                        <h3 className="text-2xl font-black text-white mb-2">その他、業界の最前線で活躍するプロフェッショナル多数</h3>
-                                        <p className="text-gray-400 text-sm md:text-base leading-relaxed font-medium">
+                                        <h3 className="text-3xl md:text-4xl font-black text-white mb-4">その他、業界の最前線で活躍する<br/><span className="text-red-500">プロフェッショナル多数</span></h3>
+                                        <p className="text-white text-xl leading-relaxed font-bold">
                                             映画配給やプランナー、舞台演出家などエンタメ作品に関わるプロの特別授業を予定。<br/>
                                             第一線の現場で活動している人員のため、リモート特別授業あるいは対面授業にて、日程調整後に受講者にお伝えします。
                                         </p>
-                                        <div className="flex flex-wrap gap-4 mt-4">
-                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Mic2 size={12}/> 特別講義</span>
-                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Globe size={12}/> リモート対応</span>
-                                            <span className="bg-black border border-gray-600 px-3 py-1 rounded text-xs text-gray-300 flex items-center gap-1"><Users size={12}/> 現場連携</span>
+                                        <div className="flex flex-wrap gap-4 mt-6">
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Mic2 size={20}/> 特別講義</span>
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Globe size={20}/> リモート対応</span>
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Users size={20}/> 現場連携</span>
                                         </div>
                                     </div>
                                 </div>
@@ -606,84 +385,81 @@
                         </div>
                     </section>
 
-                    {/* About Section */}
-                    <section id="about" className="py-32 bg-zinc-900 text-white relative overflow-hidden">
-                        <div className="max-w-7xl mx-auto px-4 relative z-10">
-                            <div className="mb-20 animate-on-scroll text-center md:text-left">
-                                <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter mb-4">
-                                    THREE <span className="text-transparent text-stroke">WEAPONS</span>
-                                </h2>
-                                <p className="text-xl md:text-2xl font-bold text-red-500">プロになるための3つの武器</p>
-                            </div>
+                    {/* Curriculum (Roadmap Design) */}
+                    <section id="curriculum" className="py-24 bg-red-800 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-noise opacity-20"></div>
+                        <div className="max-w-5xl mx-auto px-4 relative z-10">
+                            <h2 className="text-5xl md:text-7xl font-black text-white text-center mb-16 italic uppercase drop-shadow-md">Training <span className="text-black">Roadmap</span></h2>
+                            
+                            <div className="relative">
+                                {/* Vertical Line */}
+                                <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-black transform md:-translate-x-1/2"></div>
 
-                            <div className="grid md:grid-cols-3 gap-8">
                                 {[
-                                    {
-                                        num: "01",
-                                        title: "Top-Tier Mentors",
-                                        sub: "業界最高峰の指導陣",
-                                        desc: "JAGのトップスタントマン・アクション監督が直接指導。現場の「リアル」と「安全性」を叩き込む。",
-                                        img: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?q=80&w=2069&auto=format&fit=crop"
-                                    },
-                                    {
-                                        num: "02",
-                                        title: "Creative Skills",
-                                        sub: "撮影 × 編集スキル",
-                                        desc: "ただ動けるだけじゃ食っていけない。Premiere Pro、カメラワーク、演出。「自分を売る」技術を習得。",
-                                        img: "https://images.unsplash.com/photo-1535016120720-40c6874c3b13?q=80&w=2070&auto=format&fit=crop"
-                                    },
-                                    {
-                                        num: "03",
-                                        title: "Connections",
-                                        sub: "圧倒的なコネクション",
-                                        desc: "JAG直営だからこそ、映画・ドラマ・CMの案件が豊富。卒業＝プロデビューへの最短ルート。",
-                                        img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
-                                    }
+                                    { stage: "01", title: "鋼の肉体と基礎技術", desc: "怪我をしない体作り、マット運動、現代アクション基礎", icon: <Zap /> },
+                                    { stage: "02", title: "武器アクション & 応用", desc: "時代殺陣（刀）、ガンアクション、立ち回り応用", icon: <Sword /> },
+                                    { stage: "03", title: "撮影・カメラワーク", desc: "演じる側・撮る側双方の視点、画角の理解", icon: <Camera /> },
+                                    { stage: "04", title: "編集 & デモリール制作", desc: "Premiere Pro編集、自己PR動画の完成、SNS発信", icon: <Video /> },
                                 ].map((item, i) => (
-                                    <div key={i} className="group relative h-[500px] animate-on-scroll border-2 border-zinc-700 hover:border-yellow-400 transition-colors" style={{transitionDelay: `${i*100}ms`}}>
-                                        <img src={item.img} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500 filter grayscale group-hover:grayscale-0" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                                        <div className="absolute bottom-0 left-0 p-8 w-full">
-                                            <div className="bg-red-600 text-white font-black inline-block px-2 mb-2">{item.num}</div>
-                                            <h3 className="text-3xl font-impact uppercase text-white mb-1">{item.title}</h3>
-                                            <p className="text-yellow-400 font-bold text-lg mb-4">{item.sub}</p>
-                                            <p className="text-sm text-gray-300 group-hover:text-white transition-colors">{item.desc}</p>
+                                    <div key={i} className={`flex items-center mb-12 relative ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                        {/* Center Point */}
+                                        <div className="absolute left-8 md:left-1/2 w-8 h-8 bg-yellow-400 border-4 border-black rounded-full transform -translate-x-1/2 z-20 flex items-center justify-center"></div>
+                                        
+                                        {/* Content Box */}
+                                        <div className={`ml-20 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
+                                            <div className="bg-black p-6 rounded-xl border-b-4 border-yellow-400 shadow-xl hover:transform hover:-translate-y-1 transition-transform duration-300">
+                                                <span className="text-yellow-400 font-black text-4xl block mb-2 opacity-50">STAGE {item.stage}</span>
+                                                <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2 justify-start md:justify-inherit">
+                                                    {i % 2 !== 0 && <span className="md:hidden text-red-500">{item.icon}</span>}
+                                                    {item.title}
+                                                    {i % 2 === 0 && <span className="hidden md:inline text-red-500">{item.icon}</span>}
+                                                </h3>
+                                                <p className="text-gray-400 font-bold">{item.desc}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
+                    
+                    {/* Career Path / Exit Strategy (NEW) */}
+                    <section id="career" className="py-24 bg-zinc-900 relative border-t-4 border-yellow-400">
+                         <div className="absolute inset-0 bg-noise opacity-30"></div>
+                         <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
+                             <div className="inline-block bg-red-600 text-white font-black px-6 py-2 mb-6 transform -skew-x-12 shadow-[5px_5px_0_white]">
+                                 <span className="block skew-x-12 tracking-widest text-lg">AFTER GRADUATION</span>
+                             </div>
+                             <h2 className="text-5xl md:text-7xl font-black text-yellow-400 italic mb-12">出口戦略としてのロードマップ</h2>
+                             
+                             <div className="grid md:grid-cols-3 gap-8 mb-16">
+                                 {[
+                                     { icon: <Briefcase size={40}/>, title: "JAG所属", desc: "卒業後はジャパンアクションギルド所属として活動可能。" },
+                                     { icon: <Award size={40}/>, title: "仕事の依頼・発注", desc: "CM、映画、イベントなど、実際の案件を紹介・発注。" },
+                                     { icon: <Flag size={40}/>, title: "スタント現場へ", desc: "即戦力として、プロのスタント現場へ参加。" }
+                                 ].map((item, i) => (
+                                     <div key={i} className="bg-black p-8 rounded-xl border border-zinc-700 hover:border-yellow-400 transition-colors group">
+                                         <div className="text-yellow-400 mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
+                                         <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
+                                         <p className="text-gray-400">{item.desc}</p>
+                                     </div>
+                                 ))}
+                             </div>
 
-                    {/* Curriculum (Visual Timeline) */}
-                    <section id="curriculum" className="py-24 bg-red-600 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-30"></div>
-                        <div className="max-w-6xl mx-auto px-4 relative z-10">
-                            <h2 className="text-5xl md:text-7xl font-black text-white text-center mb-16 italic uppercase drop-shadow-md">
-                                Training <span className="text-black">Roadmap</span>
-                            </h2>
-
-                            <div className="grid md:grid-cols-2 gap-8">
-                                {[
-                                    { stage: "STAGE 01", title: "鋼の肉体と基礎技術", img: "https://images.unsplash.com/photo-1517438476312-10d79c077509?q=80&w=2070&auto=format&fit=crop" },
-                                    { stage: "STAGE 02", title: "武器アクション & 応用", img: "https://images.unsplash.com/photo-1615672965681-305886470087?q=80&w=2070&auto=format&fit=crop" },
-                                    { stage: "STAGE 03", title: "撮影・カメラワーク", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop" },
-                                    { stage: "STAGE 04", title: "編集 & デモリール制作", img: "https://images.unsplash.com/photo-1536240478700-b869070f9279?q=80&w=2000&auto=format&fit=crop" },
-                                ].map((item, i) => (
-                                    <div key={i} className="relative h-64 bg-black group overflow-hidden border-4 border-black animate-on-scroll">
-                                        <img src={item.img} alt={item.title} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
-                                        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
-                                        <div className="absolute bottom-6 left-6">
-                                            <span className="block text-yellow-400 font-bold tracking-widest text-sm mb-1">{item.stage}</span>
-                                            <h3 className="text-2xl md:text-3xl font-black text-white italic">{item.title}</h3>
-                                        </div>
-                                        <div className="absolute top-4 right-4 bg-white text-black p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
-                                            <ArrowRight size={20} />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                             <div className="bg-white/10 p-10 rounded-2xl border-2 border-white backdrop-blur-sm">
+                                 <p className="text-2xl md:text-4xl font-black text-white leading-relaxed mb-8">
+                                     夢をかなえたいと思ったあなた！<br/>
+                                     <span className="text-yellow-400 border-b-4 border-red-600">現場参加への最短ルート</span>は<br/>
+                                     この学校しかない！
+                                 </p>
+                                 <button onClick={openLine} className="group bg-red-600 text-white font-black py-5 px-10 text-xl shadow-[0_0_30px_red] hover:bg-white hover:text-red-600 transition-colors duration-300 transform skew-x-[-12deg] inline-block">
+                                     <div className="flex items-center justify-center gap-3 skew-x-[12deg]">
+                                         <Zap className="fill-current animate-bounce" /> 
+                                         <span>スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
+                                     </div>
+                                 </button>
+                             </div>
+                         </div>
                     </section>
 
                     {/* FAQ Section */}
@@ -759,27 +535,16 @@
                     <footer className="bg-black text-white py-12 border-t-8 border-red-600 relative z-20">
                         <div className="max-w-7xl mx-auto px-4 text-center">
                             <h2 className="text-4xl font-impact italic mb-4">JAPAN ACTION CREATOR</h2>
-                            <div className="flex justify-center gap-6 mb-6">
-                                <a href="https://www.instagram.com/2021_jag/" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white cursor-pointer"><Instagram /></a>
-                                <a href="https://twitter.com/2021_JAG" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white cursor-pointer"><Twitter /></a>
-                            </div>
-                            <p className="text-gray-500 text-sm font-bold tracking-widest uppercase">
-                                © Japan Action Guild. All Rights Reserved.
-                            </p>
+                            <p className="text-gray-500 text-sm font-bold tracking-widest uppercase">© Japan Action Guild. All Rights Reserved.</p>
                         </div>
                     </footer>
 
                     {/* Mobile CTA */}
                     <div className={`fixed bottom-4 left-4 right-4 z-50 transition-transform duration-500 md:hidden ${showFloatingBtn ? 'translate-y-0' : 'translate-y-[150%]'}`}>
-                        <div className="bg-black/95 backdrop-blur-md p-2 rounded-lg border-2 border-red-600 shadow-2xl flex gap-3">
-                            <button 
-                                onClick={() => window.open('https://line.me/R/ti/p/@2021_JAG', '_blank')}
-                                className="flex-1 bg-red-600 text-white font-black py-4 rounded text-base flex flex-col items-center justify-center leading-none gap-1 animate-pulse shadow-lg"
-                            >
-                                <span className="text-xs text-yellow-300 block">4月開講 3期生</span>
-                                <span className="flex items-center gap-1"><Zap size={16} className="fill-white" /> 残り8名！応募する</span>
-                            </button>
-                        </div>
+                        <button onClick={openLine} className="w-full bg-red-600 text-white font-black py-4 rounded text-base shadow-lg animate-pulse border-2 border-white flex flex-col items-center justify-center">
+                            <span className="text-xs text-yellow-300 block">残り8名定員枠！</span>
+                            <span className="flex items-center gap-1"><MessageCircle size={18} /> スクール担当者とLINEで相談・応募</span>
+                        </button>
                     </div>
                 </div>
             );
