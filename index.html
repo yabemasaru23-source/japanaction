@@ -12,7 +12,7 @@
     <meta property="og:title" content="JAPAN ACTION CREATOR | クリエイター上位1%への最短ルート">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://school.japanactionguild.jp/">
-    <meta property="og:image" content="./sozai01.jpg">
+    <meta property="og:image" content="./gazousozai001.jpg">
     <meta property="og:description" content="動画編集者・YouTuber・監督志望へ。「アクション撮影」という最強の武器を手に入れろ。日本最高峰の講師陣が教えるプロ養成講座。残り8名定員枠！">
     <meta property="og:site_name" content="JAPAN ACTION CREATOR">
     <meta property="og:locale" content="ja_JP">
@@ -124,8 +124,19 @@
 
             // ★設定★
             const heroVideoFile = "./top_movie.mp4"; 
-            const promotionVideoId = "vH4UQHAeCgI";
-            const galleryImages = ["./sozai01.jpg", "./sozai02.jpg", "./sozai03.jpg", "./sozai04.jpg", "./sozai05.jpg", "./sozai07.jpg", "./sozai08.jpg", "./sozai09.jpg"];
+            const promotionVideoId = "vH4UQHAeCgI"; // YouTubeプロモーション用
+            
+            // ★新しい画像素材リスト★
+            const galleryImages = [
+                "./gazousozai001.jpg", 
+                "./gazousozai002.jpg", 
+                "./gazousozai003.jpg", 
+                "./gazousozai004.jpg", 
+                "./gazousozai005.jpg", 
+                "./gazousozai006.jpg", 
+                "./gazousozai007.jpg", 
+                "./gazousozai009.jpg"
+            ];
 
             useEffect(() => {
                 const observer = new IntersectionObserver((entries) => {
@@ -209,7 +220,8 @@
                         <div className="video-background">
                             <video autoPlay loop muted playsInline className="video-foreground">
                                 <source src={heroVideoFile} type="video/mp4" />
-                                <img src="./sozai01.jpg" alt="Hero Fallback" className="w-full h-full object-cover" />
+                                {/* フォールバック画像も新しい素材に変更 */}
+                                <img src="./gazousozai001.jpg" alt="Hero Fallback" className="w-full h-full object-cover" />
                             </video>
                         </div>
                         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-0 pointer-events-none"></div>
@@ -239,7 +251,7 @@
                                         <button onClick={openLine} className="group relative bg-red-600 text-white font-black py-6 px-12 text-xl shadow-[0_0_40px_rgba(255,0,0,0.6)] hover:bg-red-500 transition-all skew-x-[-12deg] hover:scale-105 active:scale-95 border-b-8 border-red-800 active:border-b-0 active:translate-y-2">
                                             <div className="flex items-center justify-center gap-3 skew-x-[12deg]">
                                                 <Zap className="fill-yellow-400 text-yellow-400 animate-pulse" /> 
-                                                <span>スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
+                                                <span className="text-left leading-tight">スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
                                             </div>
                                         </button>
                                     </div>
@@ -248,9 +260,14 @@
                                 <div className="hidden md:block w-1/4 relative animate-on-scroll delay-200">
                                     <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 group">
                                         <div className="absolute -inset-2 bg-gradient-to-b from-yellow-400 to-red-600 rounded-lg animate-pulse"></div>
-                                        <img src="./sozai08.jpg" alt="Hero Action" className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }} />
-                                        <div className="absolute bottom-4 right-[-40px] bg-red-600 text-white font-black text-3xl px-6 py-4 transform -rotate-6 border-4 border-white shadow-xl z-20">
-                                            残り<span className="text-yellow-300 text-5xl">8</span>名<br/><span className="text-sm">定員枠！</span>
+                                        {/* トップのイメージ画像も更新 */}
+                                        <img src="./gazousozai001.jpg" alt="Hero Action" className="relative w-full h-80 object-cover border-4 border-black grayscale group-hover:grayscale-0 transition-all" onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1523806297379-3733077a72d1?q=80&w=1569&auto=format&fit=crop"; }} />
+                                        
+                                        {/* バッジデザイン修正：日本語で読みやすく */}
+                                        <div className="absolute bottom-4 right-[-40px] bg-red-600 text-white font-black text-2xl px-6 py-4 transform -rotate-6 border-4 border-white shadow-xl z-20 text-center leading-none">
+                                            <span className="block text-sm mb-1">残り</span>
+                                            <span className="text-yellow-300 text-6xl">8</span><span className="text-xl">名</span>
+                                            <span className="block text-sm mt-1 bg-black px-1">定員枠！</span>
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +333,7 @@
                         </div>
                     </section>
 
-                    {/* Gallery */}
+                    {/* Gallery (Updated with new Images) */}
                     <section id="gallery" className="py-20 bg-black overflow-hidden">
                         <div className="text-center mb-10">
                             <h2 className="text-white text-5xl md:text-7xl font-impact italic mt-2">ACTION <span className="text-transparent text-stroke">SCENES</span></h2>
@@ -347,7 +364,7 @@
                                     { name_jp: "玉井 雅利", name_en: "MASATOSHI TAMAI", img: "./face.tamai.png" },
                                     { name_jp: "多加野 詩子", name_en: "UTAKO TAKANO", img: "./face-takano.jpg" },
                                     { name_jp: "渡辺 竜平", name_en: "RYUHEI WATANABE", img: "./fae.Ryoheiv2.jpg" },
-                                    { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" } // Changed Name
+                                    { name_jp: "矢部 勝", name_en: "MASARU YABE", img: "./face-yabe.jpg" } // Changed Name to MASARU
                                 ].map((mentor, i) => (
                                     <div key={i} className="group relative h-[400px] overflow-hidden border border-zinc-800 hover:border-red-600 transition-colors duration-500 animate-on-scroll" style={{transitionDelay: `${i*100}ms`}}>
                                         <img src={mentor.img} alt={mentor.name_en} className="absolute inset-0 w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" onError={(e) => { e.target.onerror = null; e.target.src = "https://images.unsplash.com/photo-1542596768-5d1d21f1cf72?q=80&w=1500&auto=format&fit=crop"; }} />
@@ -362,7 +379,7 @@
                                 ))}
                             </div>
                             
-                            {/* Special Guests */}
+                            {/* Special Guests (Larger Text) */}
                             <div className="mt-16 bg-zinc-900 border border-zinc-700 p-10 rounded-xl relative overflow-hidden animate-on-scroll">
                                 <div className="relative z-10 text-center md:text-left flex flex-col md:flex-row items-center gap-10">
                                     <div className="flex-shrink-0 bg-yellow-400 text-black font-black p-6 rounded-full w-32 h-32 flex items-center justify-center text-center leading-tight shadow-lg transform rotate-[-6deg]">
@@ -370,14 +387,14 @@
                                     </div>
                                     <div className="flex-grow">
                                         <h3 className="text-3xl md:text-4xl font-black text-white mb-4">その他、業界の最前線で活躍する<br/><span className="text-red-500">プロフェッショナル多数</span></h3>
-                                        <p className="text-white text-xl leading-relaxed font-bold">
+                                        <p className="text-white text-xl md:text-2xl leading-relaxed font-bold">
                                             映画配給やプランナー、舞台演出家などエンタメ作品に関わるプロの特別授業を予定。<br/>
                                             第一線の現場で活動している人員のため、リモート特別授業あるいは対面授業にて、日程調整後に受講者にお伝えします。
                                         </p>
                                         <div className="flex flex-wrap gap-4 mt-6">
-                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Mic2 size={20}/> 特別講義</span>
-                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Globe size={20}/> リモート対応</span>
-                                            <span className="bg-black border border-white px-5 py-3 rounded text-base text-white font-bold flex items-center gap-2"><Users size={20}/> 現場連携</span>
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-lg text-white font-bold flex items-center gap-2"><Mic2 size={24}/> 特別講義</span>
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-lg text-white font-bold flex items-center gap-2"><Globe size={24}/> リモート対応</span>
+                                            <span className="bg-black border border-white px-5 py-3 rounded text-lg text-white font-bold flex items-center gap-2"><Users size={24}/> 現場連携</span>
                                         </div>
                                     </div>
                                 </div>
@@ -393,37 +410,43 @@
                             
                             <div className="relative">
                                 {/* Vertical Line */}
-                                <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-black transform md:-translate-x-1/2"></div>
+                                <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-2 bg-black transform md:-translate-x-1/2"></div>
 
                                 {[
-                                    { stage: "01", title: "鋼の肉体と基礎技術", desc: "怪我をしない体作り、マット運動、現代アクション基礎", icon: <Zap /> },
-                                    { stage: "02", title: "武器アクション & 応用", desc: "時代殺陣（刀）、ガンアクション、立ち回り応用", icon: <Sword /> },
-                                    { stage: "03", title: "撮影・カメラワーク", desc: "演じる側・撮る側双方の視点、画角の理解", icon: <Camera /> },
-                                    { stage: "04", title: "編集 & デモリール制作", desc: "Premiere Pro編集、自己PR動画の完成、SNS発信", icon: <Video /> },
+                                    { stage: "01", title: "鋼の肉体と基礎技術", desc: "怪我をしない体作り、マット運動、現代アクション基礎", icon: <Zap size={32} /> },
+                                    { stage: "02", title: "武器アクション & 応用", desc: "時代殺陣（刀）、ガンアクション、立ち回り応用", icon: <Sword size={32} /> },
+                                    { stage: "03", title: "撮影・カメラワーク", desc: "演じる側・撮る側双方の視点、画角の理解", icon: <Camera size={32} /> },
+                                    { stage: "04", title: "編集 & デモリール制作", desc: "Premiere Pro編集、自己PR動画の完成、SNS発信", icon: <Video size={32} /> },
                                 ].map((item, i) => (
-                                    <div key={i} className={`flex items-center mb-12 relative ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                    <div key={i} className={`flex items-center mb-16 relative ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                                         {/* Center Point */}
-                                        <div className="absolute left-8 md:left-1/2 w-8 h-8 bg-yellow-400 border-4 border-black rounded-full transform -translate-x-1/2 z-20 flex items-center justify-center"></div>
+                                        <div className="absolute left-8 md:left-1/2 w-12 h-12 bg-yellow-400 border-4 border-black rounded-full transform -translate-x-1/2 z-20 flex items-center justify-center font-bold text-black text-xl">{i+1}</div>
                                         
                                         {/* Content Box */}
-                                        <div className={`ml-20 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
-                                            <div className="bg-black p-6 rounded-xl border-b-4 border-yellow-400 shadow-xl hover:transform hover:-translate-y-1 transition-transform duration-300">
-                                                <span className="text-yellow-400 font-black text-4xl block mb-2 opacity-50">STAGE {item.stage}</span>
-                                                <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2 justify-start md:justify-inherit">
+                                        <div className={`ml-24 md:ml-0 md:w-1/2 ${i % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
+                                            <div className="bg-black p-8 rounded-2xl border-b-8 border-yellow-400 shadow-2xl hover:transform hover:-translate-y-2 transition-transform duration-300">
+                                                <span className="text-yellow-400 font-black text-5xl block mb-2 opacity-30">STAGE {item.stage}</span>
+                                                <h3 className="text-3xl font-bold text-white mb-4 flex items-center gap-3 justify-start md:justify-inherit">
                                                     {i % 2 !== 0 && <span className="md:hidden text-red-500">{item.icon}</span>}
                                                     {item.title}
                                                     {i % 2 === 0 && <span className="hidden md:inline text-red-500">{item.icon}</span>}
                                                 </h3>
-                                                <p className="text-gray-400 font-bold">{item.desc}</p>
+                                                <p className="text-gray-300 text-lg font-bold">{item.desc}</p>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
+                                {/* Goal */}
+                                <div className="text-center relative z-20 pt-8">
+                                    <div className="inline-block bg-yellow-400 text-black font-black text-3xl px-12 py-6 rounded-full border-8 border-black shadow-2xl animate-bounce">
+                                        PRO DEBUT
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
                     
-                    {/* Career Path / Exit Strategy (NEW) */}
+                    {/* Career Path / Exit Strategy */}
                     <section id="career" className="py-24 bg-zinc-900 relative border-t-4 border-yellow-400">
                          <div className="absolute inset-0 bg-noise opacity-30"></div>
                          <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
@@ -434,28 +457,28 @@
                              
                              <div className="grid md:grid-cols-3 gap-8 mb-16">
                                  {[
-                                     { icon: <Briefcase size={40}/>, title: "JAG所属", desc: "卒業後はジャパンアクションギルド所属として活動可能。" },
-                                     { icon: <Award size={40}/>, title: "仕事の依頼・発注", desc: "CM、映画、イベントなど、実際の案件を紹介・発注。" },
-                                     { icon: <Flag size={40}/>, title: "スタント現場へ", desc: "即戦力として、プロのスタント現場へ参加。" }
+                                     { icon: <Briefcase size={50}/>, title: "JAG所属", desc: "卒業後はジャパンアクションギルド所属として活動可能。" },
+                                     { icon: <Award size={50}/>, title: "仕事の依頼・発注", desc: "CM、映画、イベントなど、実際の案件を紹介・発注。" },
+                                     { icon: <Flag size={50}/>, title: "スタント現場へ", desc: "即戦力として、プロのスタント現場へ参加。" }
                                  ].map((item, i) => (
-                                     <div key={i} className="bg-black p-8 rounded-xl border border-zinc-700 hover:border-yellow-400 transition-colors group">
-                                         <div className="text-yellow-400 mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
-                                         <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-                                         <p className="text-gray-400">{item.desc}</p>
+                                     <div key={i} className="bg-black p-10 rounded-xl border border-zinc-700 hover:border-yellow-400 transition-colors group">
+                                         <div className="text-yellow-400 mb-6 group-hover:scale-110 transition-transform flex justify-center">{item.icon}</div>
+                                         <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
+                                         <p className="text-gray-400 text-lg">{item.desc}</p>
                                      </div>
                                  ))}
                              </div>
 
-                             <div className="bg-white/10 p-10 rounded-2xl border-2 border-white backdrop-blur-sm">
-                                 <p className="text-2xl md:text-4xl font-black text-white leading-relaxed mb-8">
+                             <div className="bg-white/10 p-12 rounded-2xl border-2 border-white backdrop-blur-sm">
+                                 <p className="text-2xl md:text-4xl font-black text-white leading-relaxed mb-10">
                                      夢をかなえたいと思ったあなた！<br/>
                                      <span className="text-yellow-400 border-b-4 border-red-600">現場参加への最短ルート</span>は<br/>
                                      この学校しかない！
                                  </p>
-                                 <button onClick={openLine} className="group bg-red-600 text-white font-black py-5 px-10 text-xl shadow-[0_0_30px_red] hover:bg-white hover:text-red-600 transition-colors duration-300 transform skew-x-[-12deg] inline-block">
+                                 <button onClick={openLine} className="group bg-red-600 text-white font-black py-6 px-12 text-2xl shadow-[0_0_30px_red] hover:bg-white hover:text-red-600 transition-colors duration-300 transform skew-x-[-12deg] inline-block">
                                      <div className="flex items-center justify-center gap-3 skew-x-[12deg]">
                                          <Zap className="fill-current animate-bounce" /> 
-                                         <span>スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
+                                         <span className="text-left leading-tight">スクール担当者とLINEに登録して<br/>今すぐ応募したい！</span>
                                      </div>
                                  </button>
                              </div>
